@@ -9,6 +9,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails', require: 'dotenv/rails-now'
+  gem 'dotenv'
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
   gem 'simplecov', require: false
@@ -45,12 +46,6 @@ gem 'jbuilder', '~> 2.5'
 
 
 gem 'rails_12factor', group: :production
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-end
-
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.

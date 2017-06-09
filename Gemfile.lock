@@ -215,6 +215,7 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.2)
   devise
+  dotenv
   dotenv-rails
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)

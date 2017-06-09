@@ -1,0 +1,2 @@
+class Detour < ApplicationRecord
+end

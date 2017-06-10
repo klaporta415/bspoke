@@ -92,11 +92,29 @@
       var markerArray = [];
 
       function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          mapTypeControl: false,
-          center: {lat: 41.876580000000004, lng: -87.65322},
-          zoom: 13
+        var myPosition = new google.maps.LatLng(41.87661000000001, -87.65071);
+          var mapOptions = {
+            zoom: 13,
+            mapTypeControl: false,
+            center: myPosition
+          };
+
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+        var cascadiaFault = new google.maps.Polyline({
+          path: [
+          new google.maps.LatLng(41.876580000000004, -87.65322),
+          new google.maps.LatLng(41.87664, -87.64839),
+          new google.maps.LatLng(41.876670000000004, -87.64722)
+          ]
         });
+
+
+  cascadiaFault.setMap(map);
+
+  if (google.maps.geometry.poly.isLocationOnEdge(myPosition, cascadiaFault, 10e-1)) {
+    alert("Relocate!");
+  }
 
         new AutocompleteDirectionsHandler(map);
 
@@ -201,7 +219,7 @@
         this.directionsService.route({
           origin: {'placeId': this.originPlaceId},
           destination: {'placeId': this.destinationPlaceId},
-          provideRouteAlternatives: true,
+          provideRouteAlternatives: false,
           travelMode: this.travelMode
         }, function(response, status) {
           if (status === 'OK') {
@@ -231,7 +249,34 @@
 
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API_KEY']%>&libraries=places&callback=initMap"
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API_KEY']%>&libraries=places&callback=initMap&libraries=geometry"
         async defer></script>
   </body>
 </html>
+
+<!-- function initMap() {
+   var myPosition = new google.maps.LatLng(41.87661000000001, -87.65071);
+
+  var mapOptions = {
+    zoom: 5,
+    center: myPosition
+    };
+  var map = new google.maps.Map(document.getElementById('map'),mapOptions);
+
+  var cascadiaFault = new google.maps.Polyline({
+    path: [
+      new google.maps.LatLng(41.876580000000004, -87.65322),
+      new google.maps.LatLng(41.87664, -87.64839),
+      new google.maps.LatLng(41.876670000000004, -87.64722)
+    ]
+  });
+
+
+  cascadiaFault.setMap(map);
+
+  if (google.maps.geometry.poly.isLocationOnEdge(myPosition, cascadiaFault, 10e-1)) {
+    alert("Relocate!");
+  }
+}
+
+google.maps.event.addDomListener(window, 'load', initialize); -->

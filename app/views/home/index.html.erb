@@ -120,8 +120,8 @@
         new AutocompleteDirectionsHandler(map);
 
         google.maps.event.addListener(map, 'click', function(event) {
-       addMarker(event.latLng, map);
-       });
+          addMarker(event.latLng, map);
+        });
 
 
 
@@ -136,8 +136,10 @@
         label: labels[labelIndex++ % labels.length],
         map: map
       });
-      console.log(marker['position'].lat())
-      console.log(marker['position'].lng())
+      var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng()});
+      // console.log(marker['position'].lat())
+      // console.log(marker['position'].lng())
+      console.log(pin);
       markerArray.push([marker['position'].lat(),marker['position'].lng()])
       console.log(markerArray)
 

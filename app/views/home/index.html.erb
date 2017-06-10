@@ -137,8 +137,14 @@
         map: map
       });
       var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng()});
-      // console.log(marker['position'].lat())
-      // console.log(marker['position'].lng())
+      $.ajax({
+        url: '/pins',
+        method: 'post',
+        data: {pin: pin}
+      })
+      .done(function(response){
+        console.log(response);
+      })
       console.log(pin);
       markerArray.push([marker['position'].lat(),marker['position'].lng()])
       console.log(markerArray)

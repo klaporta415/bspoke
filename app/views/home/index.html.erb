@@ -157,14 +157,13 @@
 
                // return coordinates;
 
+            var pathArray = []
+              for(var i = 0; i < coordinates.length; i++){
+                pathArray.push(new google.maps.LatLng(coordinates[i][0], coordinates[i][1]));
+              }
+
           var routePath = new google.maps.Polyline({
-            path:  [
-              new google.maps.LatLng(coordinates[0][0], -87.6532199),
-              new google.maps.LatLng(41.8765783, -87.6518548),
-              new google.maps.LatLng(41.8778872, -87.6518869),
-              new google.maps.LatLng(41.8779516, -87.6472521),
-              new google.maps.LatLng(41.8795824, -87.6472843)
-            ]
+            path: pathArray
           });
           routePath.setMap(map);
             console.log(routePath);

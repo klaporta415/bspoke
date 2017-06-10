@@ -1,5 +1,14 @@
 class PinsController < ApplicationController
 
+  def index
+
+      Pin.ordered_json
+      pins = Pin.ordered_json
+      render json: pins
+
+  end
+
+
   def new
     @pin = Pin.new
   end

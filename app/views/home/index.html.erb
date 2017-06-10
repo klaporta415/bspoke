@@ -59,7 +59,10 @@
       }
 
     </style>
-
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js"
+    type="text/javascript" charset="utf-8"></script>
+    <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js"
+    type="text/javascript" charset="utf-8"></script>
   </head>
   <body>
     <input id="origin-input" class="controls" type="text"
@@ -92,43 +95,91 @@
       var markerArray = [];
 
       function initMap() {
-        var myPosition = new google.maps.LatLng(42.87661000000001, -87.65071);
+        var markerStart = { lat: 41.87661000000001, lng: -87.65071 };
+
+        var myPosition = new google.maps.LatLng(42.87661000000001, -87.65071)
 
         var mapOptions = {
           zoom: 10,
           mapTypeControl: false,
           center: myPosition
         };
-
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-          var routePath = new google.maps.Polyline({
-            path: [
-              new google.maps.LatLng(41.876580000000004, -87.65322),
-              new google.maps.LatLng(41.87664, -87.64839),
-              new google.maps.LatLng(41.876670000000004, -87.64722)
-            ]
-          });
+         map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
 
-        routePath.setMap(map);
+        $.ajax({
+          method: "GET",
+          url: "/pins"
+          })
+          .done(function(response){
+            // console.log(response)
+            // console.log(response[0]['latitude'])
+            for(var i = 0; i < response.length; i ++) {
+              var marker = {lat: parseFloat(response[i]['latitude']), lng: parseFloat(response[i]['longitude'])}
+              addSavedMarker(marker, map);
+            }
+        })
+          // var routePath = new google.maps.Polyline({
+          //   path:  [
+          //     new google.maps.LatLng(41.876580000000004, -87.65322),
+          //     new google.maps.LatLng(41.87664, -87.64839),
+          //     new google.maps.LatLng(41.876670000000004, -87.64722)
+          //   ]
+          // });
+          // routePath.setMap(map);
 
-        if (google.maps.geometry.poly.isLocationOnEdge(myPosition, routePath, 10e-6)) {
-          alert("Relocate!");
-        }
+
+
+
 
         new AutocompleteDirectionsHandler(map);
 
         google.maps.event.addListener(map, 'click', function(event) {
-          addMarker(event.latLng, map);
+          addSavedMarker(event.latLng, map);
         });
 
+      } //end of map init
+
+      var hereRoute = function(start,end){
+          hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=41.87663,-87.65073;41.87661,-87.65071!41.879208,-87.647219;41.879206,-87.647217"
+
+          var coordinates = []
+          $.ajax({
+            method: 'post',
+            url: hereURL
+          })
+            .done(function(response){
+              var maneuverArray = response.response.route[0].leg[0].maneuver
+              for(var i = 0; i < maneuverArray.length; i++) {
+                coordinates.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
+              }
+              console.log(coordinates);
+
+               // return coordinates;
+
+            var pathArray = []
+              for(var i = 0; i < coordinates.length; i++){
+                pathArray.push(new google.maps.LatLng(coordinates[i][0], coordinates[i][1]));
+              }
+
+          var routePath = new google.maps.Polyline({
+            path: pathArray
+          });
+          routePath.setMap(map);
+            console.log(routePath);
+            })
+
+    }
+
+  // function createRoute(coordinates) {
+    // console.log(coordinates)
+  // }
 
 
-      }
 
 
-      function addMarker(location, map) {
+
+      function addSavedMarker(location, map) {
        // Add the marker at the clicked location, and add the next-available label
       // from the array of alphabetical characters.
       var marker = new google.maps.Marker({
@@ -136,26 +187,29 @@
         label: labels[labelIndex++ % labels.length],
         map: map
       });
-      var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng()});
-      $.ajax({
-        url: '/pins',
-        method: 'post',
-        data: {pin: pin}
-      })
-      .done(function(response){
-        console.log(response);
-      })
-      console.log(pin);
-      markerArray.push([marker['position'].lat(),marker['position'].lng()])
-      console.log(markerArray)
+    }
 
-}
-
-
-
-
-
-
+      function addMarker(location, map) {
+         // Add the marker at the clicked location, and add the next-available label
+        // from the array of alphabetical characters.
+        var marker = new google.maps.Marker({
+          position: location,
+          label: labels[labelIndex++ % labels.length],
+          map: map
+        });
+        var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng()});
+        $.ajax({
+          url: '/pins',
+          method: 'post',
+          data: {pin: pin}
+        })
+        .done(function(response){
+          // console.log(response);
+        })
+        // console.log(pin);
+        markerArray.push([marker['position'].lat(),marker['position'].lng()])
+        // console.log(markerArray)
+      }
 
        /**
         * @constructor
@@ -205,6 +259,8 @@
         autocomplete.bindTo('bounds', this.map);
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
+          // console.log(place);
+          //
           if (!place.place_id) {
             window.alert("Please select an option from the dropdown list.");
             return;
@@ -232,27 +288,19 @@
           travelMode: this.travelMode
         }, function(response, status) {
           if (status === 'OK') {
-            console.log(response);
-            var routePointsArray = [];
-            for(var i = 0; i < response['routes'].length; i++){
-              var routePoints = response['routes'][i].overview_path
 
-                for(var obj in routePoints){
-                  console.log(routePoints[obj].lat());
-                  console.log(routePoints[obj].lng());
-                  // console.log("------------")
-                  routePointsArray.push([routePoints[obj].lat(), routePoints[obj].lng()])
-                }
-            }
-              console.log(routePointsArray)
-             // console.log(response['routes']['0'].overview_path[0].lat())
+            // console.log(response);
+
+
+              var routePoints = response['routes'][0].overview_path
+                  var start = ([routePoints[0].lat(), routePoints[0].lng()])
+                  var end = ([routePoints[routePoints.length - 1].lat(), routePoints[routePoints.length - 1].lng()])
+                  var adjustedRoute = hereRoute(start , end);
             me.directionsDisplay.setDirections(response);
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
-
-
       };
 
 

@@ -135,7 +135,7 @@
         new AutocompleteDirectionsHandler(map);
 
         google.maps.event.addListener(map, 'click', function(event) {
-          addSavedMarker(event.latLng, map);
+          addMarker(event.latLng, map);
         });
 
       } //end of map init

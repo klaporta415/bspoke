@@ -1,15 +1,15 @@
+<!DOCTYPE html>
 <html>
   <head>
     <title>Place Autocomplete</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API_KEY']%>&libraries=places&callback=initMap"
-        async="" defer="defer" type="text/javascript"></script>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 100%;
+        height: 50%;
+        width: 50%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
@@ -59,6 +59,7 @@
       }
 
     </style>
+
   </head>
   <body>
     <input id="origin-input" class="controls" type="text"
@@ -80,20 +81,54 @@
 
     <div id="map"></div>
 
+
     <script>
       // This example requires the Places library. Include the libraries=places
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+      var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      var labelIndex = 0;
+      var markerArray = [];
+
       function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           mapTypeControl: false,
-          center: {lat: -33.8688, lng: 151.2195},
+          center: {lat: 41.876580000000004, lng: -87.65322},
           zoom: 13
         });
 
         new AutocompleteDirectionsHandler(map);
+
+        google.maps.event.addListener(map, 'click', function(event) {
+       addMarker(event.latLng, map);
+       });
+
+
+
       }
+
+
+      function addMarker(location, map) {
+       // Add the marker at the clicked location, and add the next-available label
+      // from the array of alphabetical characters.
+      var marker = new google.maps.Marker({
+        position: location,
+        label: labels[labelIndex++ % labels.length],
+        map: map
+      });
+      console.log(marker['position'].lat())
+      console.log(marker['position'].lng())
+      markerArray.push([marker['position'].lat(),marker['position'].lng()])
+      console.log(markerArray)
+
+}
+
+
+
+
+
+
 
        /**
         * @constructor
@@ -166,16 +201,37 @@
         this.directionsService.route({
           origin: {'placeId': this.originPlaceId},
           destination: {'placeId': this.destinationPlaceId},
+          provideRouteAlternatives: true,
           travelMode: this.travelMode
         }, function(response, status) {
           if (status === 'OK') {
+            console.log(response);
+            var routePointsArray = [];
+            for(var i = 0; i < response['routes'].length; i++){
+              var routePoints = response['routes'][i].overview_path
+
+                for(var obj in routePoints){
+                  console.log(routePoints[obj].lat());
+                  console.log(routePoints[obj].lng());
+                  // console.log("------------")
+                  routePointsArray.push([routePoints[obj].lat(), routePoints[obj].lng()])
+                }
+            }
+              console.log(routePointsArray)
+             // console.log(response['routes']['0'].overview_path[0].lat())
             me.directionsDisplay.setDirections(response);
           } else {
             window.alert('Directions request failed due to ' + status);
           }
         });
+
+
       };
 
+
+
     </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%ENV['GOOGLE_API_KEY']%>&libraries=places&callback=initMap"
+        async defer></script>
   </body>
 </html>

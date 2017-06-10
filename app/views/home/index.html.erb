@@ -140,11 +140,7 @@
 
       } //end of map init
       var hereRoute = function(start,end){
-        console.log("function was successfully called")
-        console.log(start);
-        console.log(end);
-
-          hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=41.87663,-87.65073;41.87661,-87.65071"
+          hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=41.87663,-87.65073;41.87661,-87.65071!41.879208,-87.647219;41.879206,-87.647217"
 
           var path = []
           $.ajax({

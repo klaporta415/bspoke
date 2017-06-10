@@ -121,6 +121,7 @@
         })
           hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!41.8764517,-87.6554024&waypoint1=geo!41.8811267,-87.6476527&mode=fastest;bicycle;traffic:disabled&avoidareas=41.87663,-87.65073;41.87661,-87.65071"
 
+          var path = []
           $.ajax({
             method: 'post',
             url: hereURL
@@ -128,12 +129,12 @@
             .done(function(response){
               var maneuverArray = response.response.route[0].leg[0].maneuver
               for(var i = 0; i < maneuverArray.length; i++) {
-                var path = []
-                console.log(maneuverArray[i].position.latitude);
+                path.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
               }
-              // console.log(maneuverArray[0]);
+              // console.log(path);
+              return path;
             })
-
+            console.log(path);
         // addSavedMarker(markerStart, map);
 
           var routePath = new google.maps.Polyline({
@@ -237,6 +238,8 @@
         autocomplete.bindTo('bounds', this.map);
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
+          console.log(place);
+          //
           if (!place.place_id) {
             window.alert("Please select an option from the dropdown list.");
             return;
@@ -268,16 +271,19 @@
             console.log(response);
 
             var routePointsArray = [];
-            for(var i = 0; i < response['routes'].length; i++){
-              var routePoints = response['routes'][i].overview_path
+            // for(var i = 0; i < response['routes'].length; i++){
+              var routePoints = response['routes'][0].overview_path
 
-                for(var obj in routePoints){
-                  console.log(routePoints[obj].lat());
-                  console.log(routePoints[obj].lng());
-                  console.log("------------")
-                  routePointsArray.push([routePoints[obj].lat(), routePoints[obj].lng()])
-                }
-            }
+                // for(var obj in routePoints){
+                //   console.log(routePoints[obj].lat());
+                //   console.log(routePoints[obj].lng());
+                //   console.log("------------")
+                  routePointsArray.push([routePoints[0].lat(), routePoints[0].lng()])
+                  routePointsArray.push([routePoints[routePoints.length - 1].lat(), routePoints[routePoints.length - 1].lng()])
+                  console.log(routePointsArray);
+                  // console.log(routePointsArray);
+                // }
+            // }
               // console.log(routePointsArray)
              // console.log(response['routes']['0'].overview_path[0].lat())
             me.directionsDisplay.setDirections(response);

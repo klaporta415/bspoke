@@ -139,10 +139,11 @@
         });
 
       } //end of map init
+
       var hereRoute = function(start,end){
           hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=41.87663,-87.65073;41.87661,-87.65071!41.879208,-87.647219;41.879206,-87.647217"
 
-          var path = []
+          var coordinates = []
           $.ajax({
             method: 'post',
             url: hereURL
@@ -150,26 +151,30 @@
             .done(function(response){
               var maneuverArray = response.response.route[0].leg[0].maneuver
               for(var i = 0; i < maneuverArray.length; i++) {
-                path.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
+                coordinates.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
               }
-              // console.log(path);
-              return path;
-            })
-            console.log(path);
+              console.log(coordinates);
 
+               // return coordinates;
 
           var routePath = new google.maps.Polyline({
             path:  [
-              new google.maps.LatLng(41.876580000000004, -87.65322),
-              new google.maps.LatLng(41.87664, -87.64839),
-              new google.maps.LatLng(41.876670000000004, -87.64722)
+              new google.maps.LatLng(coordinates[0][0], -87.6532199),
+              new google.maps.LatLng(41.8765783, -87.6518548),
+              new google.maps.LatLng(41.8778872, -87.6518869),
+              new google.maps.LatLng(41.8779516, -87.6472521),
+              new google.maps.LatLng(41.8795824, -87.6472843)
             ]
           });
           routePath.setMap(map);
+            console.log(routePath);
+            })
+
     }
 
-
-
+  // function createRoute(coordinates) {
+    // console.log(coordinates)
+  // }
 
 
 
@@ -255,7 +260,7 @@
         autocomplete.bindTo('bounds', this.map);
         autocomplete.addListener('place_changed', function() {
           var place = autocomplete.getPlace();
-          console.log(place);
+          // console.log(place);
           //
           if (!place.place_id) {
             window.alert("Please select an option from the dropdown list.");
@@ -285,7 +290,7 @@
         }, function(response, status) {
           if (status === 'OK') {
 
-            console.log(response);
+            // console.log(response);
 
 
               var routePoints = response['routes'][0].overview_path

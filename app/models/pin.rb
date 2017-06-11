@@ -6,7 +6,7 @@ class Pin < ApplicationRecord
   # end
 
   def self.ordered_json
-    order("created_at DESC").limit(5).to_json
+    order("created_at DESC").to_json
   end
 
 end

@@ -17,12 +17,13 @@ class PinsController < ApplicationController
   end
 
   def create
-    p params
+
     @pin = Pin.create(pin_params)
+
   end
 
   private
     def pin_params
-      params.require(:pin).permit(:latitude, :longitude)
+      params.require(:pin).permit(:latitude, :longitude, :category)
     end
 end

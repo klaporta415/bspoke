@@ -5,13 +5,19 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div class="nav-bar">
+      <nav class="drop-down">
+        <%= render "layouts/drop_down" %>
+      </nav>
+    </div>
   </head>
   <body>
-    <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <p>nothing makes any sense anymore</p>
 
     <%= yield %>
   </body>

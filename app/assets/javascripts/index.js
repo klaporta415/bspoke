@@ -18,7 +18,8 @@ function initMap() {
 
   $.ajax({
     method: "GET",
-    url: "/pins"
+    url: "/pins",
+    data: {avoid: 'all'}
     })
     .done(function(response){
       for(var i = 0; i < response.length; i ++) {
@@ -69,7 +70,8 @@ var hereRoute = function(start,end){
 
   $.ajax({
     method: "GET",
-    url: "/pins"
+    url: "/pins",
+    data: {avoid: avoidSelection}
     })
     .done(function(response){
 

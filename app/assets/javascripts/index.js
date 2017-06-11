@@ -58,6 +58,15 @@ function initMap() {
 
 
 var hereRoute = function(start,end){
+
+
+  if (document.querySelector('input[name = "name"]:checked') != null){
+  var avoidSelection = document.querySelector('input[name = "name"]:checked').value
+  }
+
+
+
+
   $.ajax({
     method: "GET",
     url: "/pins"
@@ -133,19 +142,19 @@ function addSavedMarker(location, category,  map) {
   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   var icons = {
     general: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497218400/general_warning_acbofd.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497219196/bspoke_warning_izvhrq.png'
     },
     smell: {
       icon: iconBase + 'library_maps.png'
     },
     goose: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497217313/goose_warning_dsu3sc.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220304/goose_warning_no_color_ze3xkp.png'
     },
     event: {
       icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'
     },
     roadCondition: {
-      icon: iconBase + 'library_maps.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220166/warning_cone_aw0l7w.png'
     }
 
   };
@@ -161,19 +170,19 @@ function addMarker(location, map) {
    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
      var icons = {
     general: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497218400/general_warning_acbofd.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497219196/bspoke_warning_izvhrq.png'
     },
     smell: {
       icon: iconBase + 'library_maps.png'
     },
     goose: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497217313/goose_warning_dsu3sc.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220304/goose_warning_no_color_ze3xkp.png'
     },
     event: {
       icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'
     },
     roadCondition: {
-      icon: iconBase + 'library_maps.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220166/warning_cone_aw0l7w.png'
     }
 
   };

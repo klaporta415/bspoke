@@ -1,12 +1,15 @@
 class PinsController < ApplicationController
 
   def index
-
-      Pin.ordered_json
-      pins = Pin.ordered_json
-      render json: pins
-
+    Pin.ordered_json
+    pins = Pin.ordered_json
+    render json: pins
   end
+
+  # def pin_index
+  #   Pin.ordered_json
+  #   pins = Pin.ordered_json
+  # end
 
 
   def new

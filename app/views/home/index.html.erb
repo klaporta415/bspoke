@@ -170,6 +170,13 @@
             url: hereURL
           })
             .done(function(response){
+              // console.log(response)
+              // console.log("-------")
+              // console.log(response.response.route[0].waypoint)
+              // console.log("-------")
+              // console.log(response.response.route[0].waypoint[1].mappedPosition.latitude)
+              // console.log(response.response.route[0].waypoint[1].mappedPosition.longitude)
+
               var maneuverArray = response.response.route[0].leg[0].maneuver
               for(var i = 0; i < maneuverArray.length; i++) {
                 coordinates.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
@@ -188,6 +195,25 @@
           });
           routePath.setMap(map);
             // console.log(routePath);
+
+          // console.log("--------")
+          // console.log(coordinates)
+
+          var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + coordinates[0][0] + ',' + coordinates[0][1] + "&destination=" + coordinates[coordinates.length - 1][0] + ',' + coordinates[coordinates.length - 1][1] + "&waypoints="
+          for(var locationInfo in coordinates){
+
+            if(locationInfo != 1 && locationInfo != coordinates.length - 1) {
+
+            gURL = gURL + coordinates[locationInfo][0] + ',' + coordinates[locationInfo][1] + '|'
+
+            }
+
+          }
+          gURL = gURL.slice(0, -1);
+
+          console.log(gURL)
+
+
             })
 
         })

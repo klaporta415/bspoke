@@ -92,6 +92,10 @@
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+
+      // https://www.google.com/maps/dir/?api=1&origin=Devbootcamp+Chicago&destination=Dugans+Chicago&travelmode=walking&waypoints=41.8765783,-87.6518548|41.8778872,-87.6518869|41.8779194,-87.6495588|41.8791747,-87.649591|41.8792176,-87.6472628
+
+
       var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
       var labelIndex = 0;
       var markerArray = [];
@@ -166,6 +170,13 @@
             url: hereURL
           })
             .done(function(response){
+              // console.log(response)
+              // console.log("-------")
+              // console.log(response.response.route[0].waypoint)
+              // console.log("-------")
+              // console.log(response.response.route[0].waypoint[1].mappedPosition.latitude)
+              // console.log(response.response.route[0].waypoint[1].mappedPosition.longitude)
+
               var maneuverArray = response.response.route[0].leg[0].maneuver
               for(var i = 0; i < maneuverArray.length; i++) {
                 coordinates.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
@@ -184,6 +195,25 @@
           });
           routePath.setMap(map);
             // console.log(routePath);
+
+          // console.log("--------")
+          // console.log(coordinates)
+
+          var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + coordinates[0][0] + ',' + coordinates[0][1] + "&destination=" + coordinates[coordinates.length - 1][0] + ',' + coordinates[coordinates.length - 1][1] + "&waypoints="
+          for(var locationInfo in coordinates){
+
+            if(locationInfo != 1 && locationInfo != coordinates.length - 1) {
+
+            gURL = gURL + coordinates[locationInfo][0] + ',' + coordinates[locationInfo][1] + '|'
+
+            }
+
+          }
+          gURL = gURL.slice(0, -1);
+
+          console.log(gURL)
+
+
             })
 
         })

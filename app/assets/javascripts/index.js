@@ -133,13 +133,13 @@ function addSavedMarker(location, category,  map) {
   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   var icons = {
     general: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497217313/goose_warning_dsu3sc.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497218400/general_warning_acbofd.png'
     },
     smell: {
       icon: iconBase + 'library_maps.png'
     },
     goose: {
-      icon: iconBase + 'info-i_maps.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497217313/goose_warning_dsu3sc.png'
     },
     event: {
       icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'
@@ -161,13 +161,13 @@ function addMarker(location, map) {
    var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
      var icons = {
     general: {
-      icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497218400/general_warning_acbofd.png'
     },
     smell: {
       icon: iconBase + 'library_maps.png'
     },
     goose: {
-      icon: iconBase + 'info-i_maps.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497217313/goose_warning_dsu3sc.png'
     },
     event: {
       icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'

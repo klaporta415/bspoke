@@ -128,19 +128,26 @@ var hereRoute = function(start,end){
 
 
 function addSavedMarker(location, category,  map) {
-  console.log(category)
+
 
   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
   var icons = {
     general: {
-      icon: iconBase + 'parking_lot_maps.png'
+      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497217313/goose_warning_dsu3sc.png'
     },
-    smells: {
+    smell: {
       icon: iconBase + 'library_maps.png'
     },
-    pothole: {
+    goose: {
       icon: iconBase + 'info-i_maps.png'
+    },
+    event: {
+      icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'
+    },
+    roadCondition: {
+      icon: iconBase + 'library_maps.png'
     }
+
   };
 
   var marker = new google.maps.Marker({
@@ -151,6 +158,26 @@ function addSavedMarker(location, category,  map) {
 }
 
 function addMarker(location, map) {
+   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+     var icons = {
+    general: {
+      icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'
+    },
+    smell: {
+      icon: iconBase + 'library_maps.png'
+    },
+    goose: {
+      icon: iconBase + 'info-i_maps.png'
+    },
+    event: {
+      icon: 'https://emojipedia-us.s3.amazonaws.com/cache/8d/bf/8dbf937d8f8490332e3190b2de16063c.png'
+    },
+    roadCondition: {
+      icon: iconBase + 'library_maps.png'
+    }
+
+  };
+
 
  if (document.querySelector('input[name = "type"]:checked') != null){
   var querySelection = document.querySelector('input[name = "type"]:checked').value
@@ -159,7 +186,7 @@ function addMarker(location, map) {
 
   var marker = new google.maps.Marker({
     position: location,
-    label: labels[labelIndex++ % labels.length],
+    icon: icons[querySelection].icon,
     map: map
   });
   var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng(), category: querySelection});
@@ -185,7 +212,6 @@ function AutocompleteDirectionsHandler(map) {
   this.travelMode = 'BICYCLING';
   var originInput = document.getElementById('origin-input');
   var destinationInput = document.getElementById('destination-input');
-  var modeSelector = document.getElementById('mode-selector');
 
   this.directionsService = new google.maps.DirectionsService;
   this.directionsDisplay = new google.maps.DirectionsRenderer;
@@ -201,7 +227,7 @@ function AutocompleteDirectionsHandler(map) {
 
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
-  this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(modeSelector);
+
 }
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {

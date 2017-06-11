@@ -8,9 +8,11 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <nav class="drop-down">
-      <%= render "layouts/drop_down" %>
-    </nav>
+    <div class="nav-bar">
+      <nav class="drop-down">
+        <%= render "layouts/drop_down" %>
+      </nav>
+    </div>
   </head>
   <body>
     <p class="notice"><%= notice %></p>

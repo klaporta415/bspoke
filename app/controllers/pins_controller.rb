@@ -18,11 +18,15 @@ class PinsController < ApplicationController
 
   def create
     p params
-    @pin = Pin.create(pin_params)
+    @pin = Pin.new(pin_params)
+    if @pin.category == "on"
+      @pin.category = "general"
+    end
+    @pin.save
   end
 
   private
     def pin_params
-      params.require(:pin).permit(:latitude, :longitude)
+      params.require(:pin).permit(:latitude, :longitude, :category)
     end
 end

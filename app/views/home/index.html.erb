@@ -80,7 +80,19 @@
 
       <input type="radio" name="type" id="changemode-driving">
       <label for="changemode-driving">Driving</label>
+
     </div>
+    <div id="marker-selector" class= "controls">
+      <input type="radio" name="type" id="changermarker-pothole" value="pothole">
+      <label for="changemarker-pothole">pothole</label>
+
+      <input type="radio" name="type" id="changermarker-smells" value="smells">
+      <label for="changemarker-smells">smells</label>
+
+    </div>
+
+
+
 
     <div id="map"></div>
 
@@ -125,15 +137,44 @@
               addSavedMarker(marker, map);
             }
         })
+        //   google.maps.event.addListener(map, 'mouse', function(event) {
+        //   addMarker(event.latLng, map);
+        // });
 
 
         new AutocompleteDirectionsHandler(map);
+        var mousedUp = false;
+        google.maps.event.addListener(map, 'mousedown', function(event){
+          mousedUp = false;
+            var thing = $(this);
 
-        google.maps.event.addListener(map, 'click', function(event) {
-          addMarker(event.latLng, map);
+          setTimeout(function(){
+            if(mousedUp === false){
+            //do something if the mouse was still down
+            //after 500ms
+
+
+
+
+
+
+            addMarker(event.latLng, map);
+            }
+          }, 1000);
         });
+        google.maps.event.addListener(map, 'mouseup', function(event){
+          mousedUp = true;
+      });
+        google.maps.event.addListener(map, 'dragstart', function(event){
+          mousedUp = true;
+      });
+
+
+
+
 
       } //end of map init
+
 
       var hereRoute = function(start,end){
         $.ajax({
@@ -227,6 +268,7 @@
 
 
 
+
       function addSavedMarker(location, map) {
        // Add the marker at the clicked location, and add the next-available label
       // from the array of alphabetical characters.
@@ -236,16 +278,25 @@
         map: map
       });
     }
+      $("#changermarker-smells").on('click', function() {
+          console.log("clicked a smells button")
+        });
 
       function addMarker(location, map) {
          // Add the marker at the clicked location, and add the next-available label
+          var querySelection = document.querySelector('input[name = "type"]:checked').value
         // from the array of alphabetical characters.
+        var markerInput = document.getElementById('marker-selector');
+        console.log(markerInput)
+
+
+
         var marker = new google.maps.Marker({
           position: location,
           label: labels[labelIndex++ % labels.length],
           map: map
         });
-        var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng()});
+        var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng(), category: querySelection});
         $.ajax({
           url: '/pins',
           method: 'post',
@@ -270,6 +321,7 @@
         var originInput = document.getElementById('origin-input');
         var destinationInput = document.getElementById('destination-input');
         var modeSelector = document.getElementById('mode-selector');
+
         this.directionsService = new google.maps.DirectionsService;
         this.directionsDisplay = new google.maps.DirectionsRenderer;
         this.directionsDisplay.setMap(map);

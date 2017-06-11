@@ -138,7 +138,7 @@
             // console.log(response);
             var avoidArray = []
             for(var pin in response){
-              avoidArray.push([(parseFloat(response[pin].latitude) + 0.001), (parseFloat(response[pin].longitude) + 0.001)]);
+              avoidArray.push([(parseFloat(response[pin].latitude) + 0.01), (parseFloat(response[pin].longitude) + 0.01)]);
               avoidArray.push([response[pin].latitude, response[pin].longitude]);
               // console.log(avoidArray);
             }

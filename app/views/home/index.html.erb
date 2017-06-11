@@ -138,9 +138,9 @@
             // console.log(response);
             var avoidArray = []
             for(var pin in response){
+              avoidArray.push([(parseFloat(response[pin].latitude) + 0.001), (parseFloat(response[pin].longitude) + 0.001)]);
               avoidArray.push([response[pin].latitude, response[pin].longitude]);
-              avoidArray.push([(response[pin].latitude + 9), (response[pin].longitude + 9)]);
-              console.log(avoidArray);
+              // console.log(avoidArray);
             }
             var query = "";
             for(var location in avoidArray){
@@ -148,14 +148,15 @@
               if(location < (avoidArray.length - 1) && (location % 2 == 0)){
               // query = query + avoidArray[location][0] + ',' + avoidArray[location][1] + ';' + avoidArray[(location + 1)][0] + ',' avoidArray[(location + 1)][0] + '!';
               query = query + avoidArray[location][0] + ',' + avoidArray[location][1] + ';' + avoidArray[(parseInt(location) + 1)][0] + ',' + avoidArray[(parseInt(location) + 1)][1] + '!';
-              console.log(parseInt(location) + 1);
+              // console.log(parseInt(location) + 1);
               }
             }
             query = query.slice(0, -1);
-            console.log(query);
+            // console.log(query);
 
 
-          hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=41.87663,-87.65073;41.87661,-87.65071!41.879208,-87.647219;41.879206,-87.647217"
+          hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=" + query;
+          console.log(hereURL);
 
           var coordinates = []
           $.ajax({
@@ -167,7 +168,7 @@
               for(var i = 0; i < maneuverArray.length; i++) {
                 coordinates.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
               }
-              // console.log(coordinates);
+              console.log(coordinates);
 
                // return coordinates;
 

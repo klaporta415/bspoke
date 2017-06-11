@@ -17,12 +17,9 @@ class PinsController < ApplicationController
   end
 
   def create
-    p params
-    @pin = Pin.new(pin_params)
-    if @pin.category == "on"
-      @pin.category = "general"
-    end
-    @pin.save
+
+    @pin = Pin.create(pin_params)
+
   end
 
   private

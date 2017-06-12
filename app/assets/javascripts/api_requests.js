@@ -8,11 +8,7 @@ var hereRoute = function(start,end){
     data: {avoid: avoidSelection}
     })
     .done(function(response){
-      var avoidArray = []
-      for(var pin in response){
-        avoidArray.push([(parseFloat(response[pin].latitude) + 0.001), (parseFloat(response[pin].longitude) + 0.001)]);
-        avoidArray.push([response[pin].latitude, response[pin].longitude]);
-      }
+      var avoidArray = generateBuddyPins(response);
       var query = "";
       for(var location in avoidArray){
 
@@ -67,3 +63,11 @@ var hereRoute = function(start,end){
   })
 }
  //end of hereRoute function
+function generateBuddyPins(response){
+  var avoidArray = []
+  for(var pin in response){
+    avoidArray.push([(parseFloat(response[pin].latitude) + 0.001), (parseFloat(response[pin].longitude) + 0.001)]);
+    avoidArray.push([response[pin].latitude, response[pin].longitude]);
+  }
+  return avoidArray;
+}

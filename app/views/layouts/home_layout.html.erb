@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bspoke</title>
+      <%= csrf_meta_tags %>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+      <meta charset="utf-8">
+      <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+      <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+
+  </head>
+  <body class="home_content">
+
+      <h4><%= link_to root_path do %></h4>
+        <div class="home_logo">
+          <%= image_tag "logo.png" %>
+          <% end %>
+    </div>
+
+    <div class="buttons">
+
+      <%= link_to "Get Route", home_map_path, class: "route_button"%>
+
+      <%= link_to "Sign-in", home_map_path, class: "login_button"%>
+
+      <%= link_to "Sign-up", home_map_path, class: "route_button"%>
+    </div>
+
+
+  </body>
+
+
+</html>

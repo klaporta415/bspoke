@@ -21,10 +21,8 @@ var hereRoute = function(start,end){
           var pathArray = generateRouteForGoogle(maneuverArray);
 
           var gURL = generateURLForGoogleRoute(maneuverArray);
-        console.log(gURL)
-
-    })
-  })
+        })
+      })
 }
  //end of hereRoute function
 function generateBuddyPins(response){

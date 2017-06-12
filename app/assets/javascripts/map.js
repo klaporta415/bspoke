@@ -1,4 +1,4 @@
-var markerArray = [];
+// var markerArray = [];
 
 function initMap() {
   var myPosition = new google.maps.LatLng(41.87661000000001, -87.65071)

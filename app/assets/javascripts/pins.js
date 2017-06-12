@@ -66,7 +66,7 @@ function addMarker(location, map) {
   .done(function(response){
   })
 
-  markerArray.push([marker['position'].lat(),marker['position'].lng()])
+  // markerArray.push([marker['position'].lat(),marker['position'].lng()])
 }
 
 function pinClickEvent(){

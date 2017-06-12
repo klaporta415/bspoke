@@ -1,4 +1,5 @@
 class PinsController < ApplicationController
+  before_action :authenticate_user!, only: [:create]
 
   def index
     avoidance = params['avoid']
@@ -12,9 +13,7 @@ class PinsController < ApplicationController
   end
 
   def create
-
     @pin = Pin.create(pin_params)
-
   end
 
   private

@@ -51,22 +51,26 @@ function addMarker(location, map) {
   var querySelection = document.querySelector('input[name = "type"]:checked').value
  }
  else{var querySelection = "general"}
-
-  var marker = new google.maps.Marker({
-    position: location,
-    icon: pinImages[querySelection].icon,
-    map: map
-  });
-  var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng(), category: querySelection});
+  console.log("lat", location.lat());
+  console.log("long", location.lng());
+  var pin = new Pin({latitude: location.lat(), longitude: location.lng(), category: querySelection});
   $.ajax({
     url: '/pins',
     method: 'post',
     data: {pin: pin}
   })
   .done(function(response){
+    var marker = new google.maps.Marker({
+      position: location,
+      icon: pinImages[querySelection].icon,
+      map: map
+    });
+    // console.log(response);
   })
-
-  markerArray.push([marker['position'].lat(),marker['position'].lng()])
+  .fail(function(failure){
+    console.log(failure);
+  })
+  // markerArray.push([marker['position'].lat(),marker['position'].lng()])
 }
 
 function pinClickEvent(){

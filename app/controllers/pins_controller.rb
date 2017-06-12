@@ -7,12 +7,6 @@ class PinsController < ApplicationController
     render json: pins
   end
 
-  # def pin_index
-  #   Pin.ordered_json
-  #   pins = Pin.ordered_json
-  # end
-
-
   def new
     @pin = Pin.new
   end

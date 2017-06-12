@@ -17,7 +17,7 @@ var hereRoute = function(start,end){
         url: hereURL
       })
         .done(function(response){
-          $('#map-page').empty();
+          $('#map-page').empty();*
           var maneuverArray = generateManeuverArray(response);
           var pathArray = generateRouteForGoogle(maneuverArray);
           var gURL = generateURLForGoogleRoute(maneuverArray);

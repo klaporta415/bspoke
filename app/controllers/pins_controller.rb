@@ -2,8 +2,8 @@ class PinsController < ApplicationController
 
   def index
     avoidance = params['avoid']
-    Pin.ordered_json(avoidance)
     pins = Pin.ordered_json(avoidance)
+    p pins
     render json: pins
   end
 

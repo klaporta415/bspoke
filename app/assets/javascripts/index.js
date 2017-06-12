@@ -56,8 +56,6 @@ function initMap() {
 } //end of map init
 
 
-
-
 var hereRoute = function(start,end){
 
 
@@ -65,7 +63,7 @@ var hereRoute = function(start,end){
   var avoidSelection = document.querySelector('input[name = "name"]:checked').value
   }
 
-
+  console.log(avoidSelection)
 
 
   $.ajax({
@@ -77,7 +75,7 @@ var hereRoute = function(start,end){
 
       var avoidArray = []
       for(var pin in response){
-        avoidArray.push([(parseFloat(response[pin].latitude) + 0.01), (parseFloat(response[pin].longitude) + 0.01)]);
+        avoidArray.push([(parseFloat(response[pin].latitude) + 0.002), (parseFloat(response[pin].longitude) + 0.002)]);
         avoidArray.push([response[pin].latitude, response[pin].longitude]);
 
       }
@@ -91,6 +89,8 @@ var hereRoute = function(start,end){
         }
       }
       query = query.slice(0, -1);
+
+
 
 
     hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=" + query;

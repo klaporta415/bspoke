@@ -69,6 +69,8 @@ function addMarker(location, map) {
   })
   .fail(function(failure){
     console.log(failure);
+    window.confirm("Must login to add pins!");
+    window.location.href='/users/sign_in';
   })
   // markerArray.push([marker['position'].lat(),marker['position'].lng()])
 }

@@ -12,45 +12,38 @@ var hereRoute = function(start,end){
       // generate url
       var hereURL = avoidQueryString(avoidArray, start, end)
 
-    console.log(hereURL);
+      var coordinates = []
+      $.ajax({
+        method: 'post',
+        url: hereURL
+      })
+        .done(function(response){
+          var maneuverArray = generateManeuverArray(response, coordinates);
 
-    var coordinates = []
-    $.ajax({
-      method: 'post',
-      url: hereURL
-    })
-      .done(function(response){
+        var pathArray = []
+          for(var i = 0; i < coordinates.length; i++){
+            pathArray.push(new google.maps.LatLng(coordinates[i][0], coordinates[i][1]));
+          }
 
-        var maneuverArray = response.response.route[0].leg[0].maneuver
-        for(var i = 0; i < maneuverArray.length; i++) {
-          coordinates.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
+      var routePath = new google.maps.Polyline({
+        path: pathArray
+      });
+      routePath.setMap(map);
+
+      var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + coordinates[0][0] + ',' + coordinates[0][1] + "&destination=" + coordinates[coordinates.length - 1][0] + ',' + coordinates[coordinates.length - 1][1] + "&waypoints="
+      for(var locationInfo in coordinates){
+
+        if(locationInfo != 1 && locationInfo != coordinates.length - 1) {
+
+        gURL = gURL + coordinates[locationInfo][0] + ',' + coordinates[locationInfo][1] + '|'
+
         }
-
-      var pathArray = []
-        for(var i = 0; i < coordinates.length; i++){
-          pathArray.push(new google.maps.LatLng(coordinates[i][0], coordinates[i][1]));
-        }
-
-    var routePath = new google.maps.Polyline({
-      path: pathArray
-    });
-    routePath.setMap(map);
-
-    var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=walking&origin=" + coordinates[0][0] + ',' + coordinates[0][1] + "&destination=" + coordinates[coordinates.length - 1][0] + ',' + coordinates[coordinates.length - 1][1] + "&waypoints="
-    for(var locationInfo in coordinates){
-
-      if(locationInfo != 1 && locationInfo != coordinates.length - 1) {
-
-      gURL = gURL + coordinates[locationInfo][0] + ',' + coordinates[locationInfo][1] + '|'
 
       }
+      gURL = gURL.slice(0, -1);
+      // console.log(gURL)
 
-    }
-    gURL = gURL.slice(0, -1);
-    // console.log(gURL)
-
-      })
-
+    })
   })
 }
  //end of hereRoute function
@@ -75,7 +68,12 @@ function avoidQueryString(avoidArray, start, end){
    return hereURL;
 }
 
-
+function generateManeuverArray(response, coordinates){
+  var maneuverArray = response.response.route[0].leg[0].maneuver
+  for(var i = 0; i < maneuverArray.length; i++) {
+      coordinates.push([maneuverArray[i].position.latitude, maneuverArray[i].position.longitude]);
+  }
+}
 
 
 

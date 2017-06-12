@@ -11,7 +11,6 @@ function initMap() {
    map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
    // ajax call loads pins saved in database
-   // make ajax request/response into a function for refactor?
    addPinsToMap();
     // autocomplete bars for start and end
   new AutocompleteDirectionsHandler(map);
@@ -38,27 +37,19 @@ function initMap() {
 
 
 var hereRoute = function(start,end){
-
-
   if (document.querySelector('input[name = "name"]:checked') != null){
   var avoidSelection = document.querySelector('input[name = "name"]:checked').value
   }
-
-  console.log(avoidSelection)
-
-
   $.ajax({
     method: "GET",
     url: "/pins",
     data: {avoid: avoidSelection}
     })
     .done(function(response){
-
       var avoidArray = []
       for(var pin in response){
         avoidArray.push([(parseFloat(response[pin].latitude) + 0.001), (parseFloat(response[pin].longitude) + 0.001)]);
         avoidArray.push([response[pin].latitude, response[pin].longitude]);
-
       }
       var query = "";
       for(var location in avoidArray){
@@ -70,9 +61,6 @@ var hereRoute = function(start,end){
         }
       }
       query = query.slice(0, -1);
-
-
-
 
     hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=" + query;
     console.log(hereURL);
@@ -115,83 +103,13 @@ var hereRoute = function(start,end){
       })
 
   })
-}
+} //end of hereRoute function
 
 
 
-function addSavedMarker(location, category,  map) {
 
 
-  var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-  var icons = {
-    general: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497219196/bspoke_warning_izvhrq.png'
-    },
-    smell: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497223391/smell_warning_pfms1z.png'
-    },
-    goose: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220304/goose_warning_no_color_ze3xkp.png'
-    },
-    event: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497221277/party_warning_swwwmb.png'
-    },
-    roadCondition: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220166/warning_cone_aw0l7w.png'
-    }
 
-  };
-
-  var marker = new google.maps.Marker({
-  position: location,
-  icon: icons[category].icon,
-  map: map
-  });
-}
-
-function addMarker(location, map) {
-   var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
-     var icons = {
-    general: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497219196/bspoke_warning_izvhrq.png'
-    },
-    smell: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497223391/smell_warning_pfms1z.png'
-    },
-    goose: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220304/goose_warning_no_color_ze3xkp.png'
-    },
-    event: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497221277/party_warning_swwwmb.png'
-    },
-    roadCondition: {
-      icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220166/warning_cone_aw0l7w.png'
-    }
-
-  };
-
-
- if (document.querySelector('input[name = "type"]:checked') != null){
-  var querySelection = document.querySelector('input[name = "type"]:checked').value
- }
- else{var querySelection = "general"}
-
-  var marker = new google.maps.Marker({
-    position: location,
-    icon: icons[querySelection].icon,
-    map: map
-  });
-  var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng(), category: querySelection});
-  $.ajax({
-    url: '/pins',
-    method: 'post',
-    data: {pin: pin}
-  })
-  .done(function(response){
-  })
-
-  markerArray.push([marker['position'].lat(),marker['position'].lng()])
-}
 
 
 /**

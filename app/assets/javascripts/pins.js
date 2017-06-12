@@ -18,3 +18,53 @@ function addPinsToMap() {
       }
   })
 }
+
+// contains marker images, saves marker
+function addSavedMarker(location, category,  map) {
+  var marker = new google.maps.Marker({
+  position: location,
+  icon: pinImages[category].icon,
+  map: map
+  });
+}
+
+pinImages = {
+  general: {
+    icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497219196/bspoke_warning_izvhrq.png'
+  },
+  smell: {
+    icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497223391/smell_warning_pfms1z.png'
+  },
+  goose: {
+    icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220304/goose_warning_no_color_ze3xkp.png'
+  },
+  event: {
+    icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497221277/party_warning_swwwmb.png'
+  },
+  roadCondition: {
+    icon: 'http://res.cloudinary.com/lx9gdutds/image/upload/v1497220166/warning_cone_aw0l7w.png'
+  }
+};
+
+function addMarker(location, map) {
+ if (document.querySelector('input[name = "type"]:checked') != null){
+  var querySelection = document.querySelector('input[name = "type"]:checked').value
+ }
+ else{var querySelection = "general"}
+
+  var marker = new google.maps.Marker({
+    position: location,
+    icon: pinImages[querySelection].icon,
+    map: map
+  });
+  var pin = new Pin({latitude: marker['position'].lat(), longitude: marker['position'].lng(), category: querySelection});
+  $.ajax({
+    url: '/pins',
+    method: 'post',
+    data: {pin: pin}
+  })
+  .done(function(response){
+  })
+
+  markerArray.push([marker['position'].lat(),marker['position'].lng()])
+}

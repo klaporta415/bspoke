@@ -1,61 +1,70 @@
+
     <input id="origin-input" class="controls" type="text"
         placeholder="Enter an origin location">
 
     <input id="destination-input" class="controls" type="text"
         placeholder="Enter a destination location">
+    <div class="pin-selectors">
+      <div class="dropdown pins">
+        <div id="marker-selector" class= "controls">
+          <a class="btn btn-default" role="button" data-toggle="dropdown" href="#">Pins<span class="caret"></span></a>
 
-    <div id="marker-selector" class= "controls">
-      <input type="radio" name="type" id="changermarker-general" value="general">
-      <label for="changemarker-general">general</label>
+          <ul class="dropdown-menu">
+            <li><input type="radio" name="type" id="changermarker-smell" value="smell">
+            <label for="changemarker-smell">smell</label></li>
 
-      <input type="radio" name="type" id="changermarker-smell" value="smell">
-      <label for="changemarker-smell">smell</label>
+            <li><input type="radio" name="type" id="changermarker-goose" value="goose">
+            <label for="changemarker-goose">goose</label></li>
 
-      <input type="radio" name="type" id="changermarker-goose" value="goose">
-      <label for="changemarker-goose">goose</label>
+            <li><input type="radio" name="type" id="changermarker-event" value="event">
+            <label for="changemarker-event">event</label></li>
 
-      <input type="radio" name="type" id="changermarker-event" value="event">
-      <label for="changemarker-event">event</label>
+            <li><input type="radio" name="type" id="changermarker-road-condition" value="roadCondition">
+            <label for="changemarker-road-conditionç">road</label></li>
 
-      <input type="radio" name="type" id="changermarker-road-condition" value="roadCondition">
-      <label for="changemarker-road-conditionç">road conditions</label>
+            <li><input type="radio" name="type" id="changermarker-other" value="general">
+              <label for="avoid-general">other</label></li>
+          </ul>
+        </div>
+      </div>
 
-    </div>
+      <div class="dropdown pins">
+        <div id="avoid-selector" class= "controls">
+          <a class="btn btn-default" role="button" data-toggle="dropdown" href="#">Avoid Pins<span class="caret"></span></a>
+          <ul class="dropdown-menu">
 
+          <li><input type="radio" name="name" id="avoid-nothing" value="nothing">
+          <label for="avoid-nothing">nothing</label></li>
 
-    <div id="avoid-selector" class= "controls">
+          <li><input type="radio" name="name" id="avoid-everything" value="everything">
+          <label for="avoid-everything">all</label></li>
 
-      <input type="radio" name="name" id="avoid-nothing" value="nothing">
-      <label for="avoid-nothing">NOTHING</label>
+          <li><input type="radio" name="name" id="avoid-smell" value="smell">
+          <label for="avoid-smell"> smell</label></li>
 
-      <input type="radio" name="name" id="avoid-everything" value="everything">
-      <label for="avoid-everything">all</label>
+          <li><input type="radio" name="name" id="avoid-goose" value="goose">
+          <label for="avoid-goose">goose</label></li>
 
-      <input type="radio" name="name" id="avoid-general" value="general">
-      <label for="avoid-general">avoid general</label>
+          <li><input type="radio" name="name" id="avoid-event" value="event">
+          <label for="avoid-event">event</label></li>
 
-      <input type="radio" name="name" id="avoid-smell" value="smell">
-      <label for="avoid-smell"> avoid smell</label>
+          <li><input type="radio" name="name" id="avoid-road-condition" value="roadCondition">
 
-      <input type="radio" name="name" id="avoid-goose" value="goose">
-      <label for="avoid-goose">avoid goose</label>
+          <label for="avoid-road-conditionç">road</label></li>
 
-      <input type="radio" name="name" id="avoid-event" value="event">
-      <label for="avoid-event">avoid event</label>
+          <li><input type="radio" name="type" id="changermarker-general" value="general">
 
-      <input type="radio" name="name" id="avoid-road-condition" value="roadCondition">
-      <label for="avoid-road-conditionç">avoid road conditions</label>
+          <label for="avoid-general">other</label></li>
 
+          </ul>
+        </div>
+      </div>
     </div>
 
 
     <div id="map"></div>
     <div id="map-page">
       <a href="http://maps.google.com/maps?daddr=lat,long&amp;ll=">Take me there!</a>
-
-
-
     </div>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API_KEY']%>&libraries=places,geometry&callback=initMap" async defer></script>
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API_KEY']%>&libraries=places,geometry&callback=initMap"
-        async defer></script>

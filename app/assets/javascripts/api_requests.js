@@ -22,10 +22,7 @@ var hereRoute = function(start,end){
           var pathArray = generateRouteForGoogle(maneuverArray);
 
           console.log("pathArray", pathArray)
-      var routePath = new google.maps.Polyline({
-        path: pathArray
-      });
-      routePath.setMap(map);
+
 
       var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=bicycling&origin=" + maneuverArray[0][0] + ',' + maneuverArray[0][1] + "&destination=" + maneuverArray[maneuverArray.length - 1][0] + ',' + maneuverArray[maneuverArray.length - 1][1] + "&waypoints="
       for(var locationInfo in maneuverArray){
@@ -79,8 +76,13 @@ function generateRouteForGoogle(maneuverArray){
     for(var i = 0; i < maneuverArray.length; i++){
       pathArray.push(new google.maps.LatLng(maneuverArray[i][0], maneuverArray[i][1]));
     }
-    return pathArray;
+    var routePath = new google.maps.Polyline({
+      path: pathArray
+    });
+  routePath.setMap(map);
+  return routePath;
 }
+
 
 
 

@@ -3,7 +3,6 @@
   <head>
     <title>Bspoke</title>
       <%= csrf_meta_tags %>
-
       <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
       <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
@@ -16,8 +15,6 @@
       <script src="http://js.api.here.com/v3/3.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
       <script src="http://js.api.here.com/v3/3.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
 
-
-
   </head>
   <body>
     <div class="nav-bar">
@@ -26,12 +23,13 @@
           <%= image_tag "logo.png" %>
 
           <% end %>
-        </div>
+    </div>
       <nav class="drop-down">
         <%= render "layouts/drop_down" %>
 
       </nav>
     </div>
+
     <div class="devise-stuff">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>

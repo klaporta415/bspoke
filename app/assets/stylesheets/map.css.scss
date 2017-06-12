@@ -6,12 +6,13 @@
         margin-left: 5px;
         margin-right: 5px;
         background-color: #2cdef9;
+
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
-        padding: 0;
+        padding: 5px;
       }
       .controls {
         margin-top: 10px;
@@ -28,12 +29,14 @@
       #destination-input {
         background-color: #fff;
         font-family: Roboto;
+        font-family: "Montserrat";
+
         font-size: 15px;
         font-weight: 300;
         margin-left: 12px;
         padding: 0 11px 0 13px;
         text-overflow: ellipsis;
-        width: 200px;
+        width: 45%;
       }
 
       #origin-input:focus,

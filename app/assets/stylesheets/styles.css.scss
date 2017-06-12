@@ -1,0 +1,44 @@
+.logo{
+  display: inline-block;
+  width: 45%;
+}
+.logo img {
+  width: 65%;
+  height: 65%;
+  display: inline-block;
+  float: left;
+}
+.devise-stuff p {
+ margin: 0;
+ padding: 0px;
+}
+.dropdown {
+ float: right;
+ position: relative;
+ top: -42px;
+ margin: 0 auto;
+ padding-right: 5px;
+ a img {width: 32px;}
+ .dropdown-menu li{width: 5px;}
+
+}
+.nav-bar {
+  height: 34px;
+
+}
+#avoid-selector{
+  font-size: 12px;
+  font-family: "Montserrat";
+}
+#marker-selector{
+  font-family: "Montserrat";
+  font-size: 12px;
+}
+.dropdown.pins {
+
+  position: relative;
+  top: 1px;
+  padding-bottom: 10px;
+
+  float: left;
+}

@@ -12,7 +12,6 @@ var hereRoute = function(start,end){
       // generate url
       var hereURL = avoidQueryString(avoidArray, start, end)
 
-
       $.ajax({
         method: 'post',
         url: hereURL
@@ -21,21 +20,8 @@ var hereRoute = function(start,end){
           var maneuverArray = generateManeuverArray(response);
           var pathArray = generateRouteForGoogle(maneuverArray);
 
-          console.log("pathArray", pathArray)
-
-
-      var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=bicycling&origin=" + maneuverArray[0][0] + ',' + maneuverArray[0][1] + "&destination=" + maneuverArray[maneuverArray.length - 1][0] + ',' + maneuverArray[maneuverArray.length - 1][1] + "&waypoints="
-      for(var locationInfo in maneuverArray){
-
-        if(locationInfo != 1 && locationInfo != maneuverArray.length - 1) {
-
-        gURL = gURL + maneuverArray[locationInfo][0] + ',' + maneuverArray[locationInfo][1] + '|'
-
-        }
-
-      }
-      gURL = gURL.slice(0, -1);
-      console.log(gURL)
+          var gURL = generateURLForGoogleRoute(maneuverArray);
+        console.log(gURL)
 
     })
   })
@@ -83,7 +69,16 @@ function generateRouteForGoogle(maneuverArray){
   return routePath;
 }
 
-
+function generateURLForGoogleRoute(maneuverArray){
+  var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=bicycling&origin=" + maneuverArray[0][0] + ',' + maneuverArray[0][1] + "&destination=" + maneuverArray[maneuverArray.length - 1][0] + ',' + maneuverArray[maneuverArray.length - 1][1] + "&waypoints="
+    for(var locationInfo in maneuverArray){
+      if(locationInfo != 1 && locationInfo != maneuverArray.length - 1) {
+        gURL = gURL + maneuverArray[locationInfo][0] + ',' + maneuverArray[locationInfo][1] + '|'
+      }
+    }
+    gURL = gURL.slice(0, -1);
+    return gURL;
+}
 
 
 

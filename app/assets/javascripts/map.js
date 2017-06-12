@@ -10,6 +10,10 @@ function initMap() {
   };
    map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+   routePath = new google.maps.Polyline({
+      path: []
+    });
+
    // ajax call loads pins saved in database
    addPinsToMap();
     // autocomplete bars for start and end

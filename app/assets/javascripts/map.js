@@ -31,7 +31,6 @@ function AutocompleteDirectionsHandler(map) {
   this.travelMode = 'BICYCLING';
   var originInput = document.getElementById('origin-input');
   var destinationInput = document.getElementById('destination-input');
-
   this.directionsService = new google.maps.DirectionsService;
   this.directionsDisplay = new google.maps.DirectionsRenderer;
   this.directionsDisplay.setMap(map);

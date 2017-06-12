@@ -9,18 +9,9 @@ var hereRoute = function(start,end){
     })
     .done(function(response){
       var avoidArray = generateBuddyPins(response);
-      var query = "";
-      for(var location in avoidArray){
+      // generate url
+      var hereURL = avoidQueryString(avoidArray, start, end)
 
-        if(location < (avoidArray.length - 1) && (location % 2 == 0)){
-
-        query = query + avoidArray[location][0] + ',' + avoidArray[location][1] + ';' + avoidArray[(parseInt(location) + 1)][0] + ',' + avoidArray[(parseInt(location) + 1)][1] + '!';
-
-        }
-      }
-      query = query.slice(0, -1);
-
-    hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=" + query;
     console.log(hereURL);
 
     var coordinates = []
@@ -71,3 +62,24 @@ function generateBuddyPins(response){
   }
   return avoidArray;
 }
+
+function avoidQueryString(avoidArray, start, end){
+  var query = "";
+  for(var location in avoidArray){
+    if(location < (avoidArray.length - 1) && (location % 2 == 0)){
+      query = query + avoidArray[location][0] + ',' + avoidArray[location][1] + ';' + avoidArray[(parseInt(location) + 1)][0] + ',' + avoidArray[(parseInt(location) + 1)][1] + '!';
+    }
+  }
+  query = query.slice(0, -1);
+   var hereURL = "https://route.cit.api.here.com/routing/7.2/calculateroute.json?app_id=9mBaxBeJ7mApiH1ztTZo&app_code=5yfWfBxENAXQsu5zhv6Lcw&waypoint0=geo!"+ start[0] + ',' + start[1] + "&waypoint1=geo!"+ end[0] + ',' + end[1] + "&mode=fastest;bicycle;traffic:disabled&avoidareas=" + query;
+   return hereURL;
+}
+
+
+
+
+
+
+
+
+

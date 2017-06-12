@@ -23,15 +23,15 @@
         height: 32px;
         outline: none;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+
       }
 
       #origin-input,
       #destination-input {
         background-color: #fff;
-        font-family: Roboto;
         font-family: "Montserrat";
 
-        font-size: 15px;
+        font-size: 12px;
         font-weight: 300;
         margin-left: 12px;
         padding: 0 11px 0 13px;
@@ -42,6 +42,7 @@
       #origin-input:focus,
       #destination-input:focus {
         border-color: #4d90fe;
+
       }
 
       #mode-selector {
@@ -52,7 +53,10 @@
       }
 
       #mode-selector label {
-        font-family: Roboto;
+        font-family: "Montserrat";
         font-size: 13px;
         font-weight: 300;
       }
+
+
+

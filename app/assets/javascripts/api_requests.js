@@ -19,8 +19,9 @@ var hereRoute = function(start,end){
         .done(function(response){
           var maneuverArray = generateManeuverArray(response);
           var pathArray = generateRouteForGoogle(maneuverArray);
-
           var gURL = generateURLForGoogleRoute(maneuverArray);
+          var gURLString = '<a href=' + gURL + '>Take me there!</a>'
+          $('body').append(gURLString);
         })
       })
 }
@@ -64,13 +65,13 @@ function generateRouteForGoogle(maneuverArray){
       path: pathArray
     });
   routePath.setMap(map);
-  return routePath;
+  return pathArray;
 }
 
 function generateURLForGoogleRoute(maneuverArray){
   var gURL = "https://www.google.com/maps/dir/?api=1&travelmode=bicycling&origin=" + maneuverArray[0][0] + ',' + maneuverArray[0][1] + "&destination=" + maneuverArray[maneuverArray.length - 1][0] + ',' + maneuverArray[maneuverArray.length - 1][1] + "&waypoints="
     for(var locationInfo in maneuverArray){
-      if(locationInfo != 1 && locationInfo != maneuverArray.length - 1) {
+      if(locationInfo != 0 && locationInfo != maneuverArray.length - 1) {
         gURL = gURL + maneuverArray[locationInfo][0] + ',' + maneuverArray[locationInfo][1] + '|'
       }
     }

@@ -10,34 +10,20 @@ function initMap() {
   };
    map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-
-  $.ajax({
-    method: "GET",
-    url: "/pins",
-    data: {avoid: 'everything'}
-    })
-    .done(function(response){
-      for(var i = 0; i < response.length; i ++) {
-        var marker = {lat: parseFloat(response[i]['latitude']), lng: parseFloat(response[i]['longitude'])}
-        var category = response[i].category
-        addSavedMarker(marker, category, map);
-      }
-  })
-
-
-
+   // ajax call loads pins saved in database
+   // make ajax request/response into a function for refactor?
+   addPinsToMap();
+    // autocomplete bars for start and end
   new AutocompleteDirectionsHandler(map);
 
+  // add pin to map by click and hold for 1sec
   var mousedUp = false;
   google.maps.event.addListener(map, 'mousedown', function(event){
     mousedUp = false;
-      var thing = $(this);
 
     setTimeout(function(){
       if(mousedUp === false){
-
-      addMarker(event.latLng, map);
-
+        addMarker(event.latLng, map);
       }
     }, 1000);
   });

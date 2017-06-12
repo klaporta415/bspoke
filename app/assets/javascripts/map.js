@@ -1,11 +1,6 @@
-
-var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-var labelIndex = 0;
 var markerArray = [];
 
 function initMap() {
-  var markerStart = { lat: 41.87661000000001, lng: -87.65071 };
-
   var myPosition = new google.maps.LatLng(41.87661000000001, -87.65071)
 
   var mapOptions = {

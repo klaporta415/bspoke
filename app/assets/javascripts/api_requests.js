@@ -17,11 +17,12 @@ var hereRoute = function(start,end){
         url: hereURL
       })
         .done(function(response){
+          $('#map-page').empty();
           var maneuverArray = generateManeuverArray(response);
           var pathArray = generateRouteForGoogle(maneuverArray);
           var gURL = generateURLForGoogleRoute(maneuverArray);
           var gURLString = '<a href=' + gURL + '>Take me there!</a>'
-          $('body').append(gURLString);
+          $('#map-page').append(gURLString);
         })
       })
 }

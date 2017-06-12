@@ -16,22 +16,7 @@ function initMap() {
   new AutocompleteDirectionsHandler(map);
 
   // add pin to map by click and hold for 1sec
-  var mousedUp = false;
-  google.maps.event.addListener(map, 'mousedown', function(event){
-    mousedUp = false;
-
-    setTimeout(function(){
-      if(mousedUp === false){
-        addMarker(event.latLng, map);
-      }
-    }, 1000);
-  });
-  google.maps.event.addListener(map, 'mouseup', function(event){
-    mousedUp = true;
-  });
-  google.maps.event.addListener(map, 'dragstart', function(event){
-    mousedUp = true;
-  });
+  pinClickEvent();
 
 } //end of map init
 
@@ -105,16 +90,10 @@ var hereRoute = function(start,end){
   })
 } //end of hereRoute function
 
-
-
-
-
-
-
-
 /**
 * @constructor
 */
+
 function AutocompleteDirectionsHandler(map) {
   this.map = map;
   this.originPlaceId = null;

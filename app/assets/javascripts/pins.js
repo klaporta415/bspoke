@@ -68,3 +68,22 @@ function addMarker(location, map) {
 
   markerArray.push([marker['position'].lat(),marker['position'].lng()])
 }
+
+function pinClickEvent(){
+  var mousedUp = false;
+  google.maps.event.addListener(map, 'mousedown', function(event){
+    mousedUp = false;
+
+    setTimeout(function(){
+      if(mousedUp === false){
+        addMarker(event.latLng, map);
+      }
+    }, 1000);
+  });
+  google.maps.event.addListener(map, 'mouseup', function(event){
+    mousedUp = true;
+  });
+  google.maps.event.addListener(map, 'dragstart', function(event){
+    mousedUp = true;
+  });
+}

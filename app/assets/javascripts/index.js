@@ -19,7 +19,7 @@ function initMap() {
   $.ajax({
     method: "GET",
     url: "/pins",
-    data: {avoid: 'all'}
+    data: {avoid: 'everything'}
     })
     .done(function(response){
       for(var i = 0; i < response.length; i ++) {

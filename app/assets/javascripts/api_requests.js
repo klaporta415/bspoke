@@ -19,11 +19,8 @@ var hereRoute = function(start,end){
       })
         .done(function(response){
           var maneuverArray = generateManeuverArray(response);
+          var pathArray = generateRouteForGoogle(maneuverArray);
 
-          var pathArray = []
-          for(var i = 0; i < maneuverArray.length; i++){
-            pathArray.push(new google.maps.LatLng(maneuverArray[i][0], maneuverArray[i][1]));
-          }
           console.log("pathArray", pathArray)
       var routePath = new google.maps.Polyline({
         path: pathArray
@@ -77,7 +74,13 @@ function generateManeuverArray(response){
   return coordinates;
 }
 
-
+function generateRouteForGoogle(maneuverArray){
+  var pathArray = []
+    for(var i = 0; i < maneuverArray.length; i++){
+      pathArray.push(new google.maps.LatLng(maneuverArray[i][0], maneuverArray[i][1]));
+    }
+    return pathArray;
+}
 
 
 

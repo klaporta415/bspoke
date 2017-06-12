@@ -59,13 +59,16 @@ function generateManeuverArray(response){
 }
 
 function generateRouteForGoogle(maneuverArray){
-  var pathArray = []
+  var pathArray = [];
+
+  routePath.setMap(null);
+
     for(var i = 0; i < maneuverArray.length; i++){
       pathArray.push(new google.maps.LatLng(maneuverArray[i][0], maneuverArray[i][1]));
     }
-    var routePath = new google.maps.Polyline({
-      path: pathArray
-    });
+
+    routePath.setPath(pathArray)
+
   routePath.setMap(map);
   return pathArray;
 }

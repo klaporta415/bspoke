@@ -2,7 +2,9 @@ class PinsController < ApplicationController
   # before_action :authenticate_user!, only: [:create]
 
   def index
+    p params
     avoidance = params['avoid']
+    p avoidance
     pins = Pin.ordered_json(avoidance)
     render json: pins
   end

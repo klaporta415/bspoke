@@ -33,14 +33,14 @@ var hereRoute = function(start,end){
           $('#map-page').append(gURLString);
 
 
-          // var legend = document.getElementById('legend');
+          var googleLink = document.getElementById('google-link');
 
 
-          // var div = document.createElement('div');
-          // div.innerHTML = '<a href=' + gURL + '>Take me there!</a>';
-          // legend.appendChild(div);
+          var div = document.createElement('div');
+          div.innerHTML = '<a href=' + gURL + '>Take me there!</a>';
+          googleLink.appendChild(div);
 
-          // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+          map.controls[google.maps.ControlPosition.CENTER].push(googleLink);
 
 
         })

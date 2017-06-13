@@ -1,7 +1,14 @@
 var hereRoute = function(start,end){
-  if (document.querySelector('input[name = "name"]:checked') != null){
-  var avoidSelection = document.querySelector('input[name = "name"]:checked').value
+
+  if (document.querySelector('input[name = "avoid"]:checked') != null){
+  // var avoidSelection = document.querySelector('input[name = "avoid[]"]:checked').value
+  // console.log(avoidSelection);
+  var avoidSelection = $("#avoid-selector form").serialize();
+    console.log(avoidSelection)
   }
+  else{avoidSelection = "avoid=everything"}
+
+
   $.ajax({
     method: "GET",
     url: "/pins",

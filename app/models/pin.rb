@@ -1,12 +1,16 @@
 class Pin < ApplicationRecord
 
   def self.ordered_json(avoidance)
-    if avoidance == "everything"
+    # p avoidance#.include?("everything")
+    if avoidance.include?("everything")
       order("created_at DESC").to_json
-    elsif avoidance == "nothing"
+    elsif avoidance.include?("nothing")
       [].to_json
     else
-      order("created_at DESC").where(category: avoidance).to_json
+
+      # avoidance.each
+      # order("created_at DESC").where(category: ).to_json
+    order("created_at DESC").where(category: avoidance ).to_json
     end
   end
 

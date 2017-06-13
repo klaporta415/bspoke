@@ -8,7 +8,7 @@ function addPinsToMap() {
     $.ajax({
     method: "GET",
     url: "/pins",
-    data: {avoid: 'everything'}
+    data: {avoid: 'avoid=everything'}
     })
     .done(function(response){
       for(var i = 0; i < response.length; i ++) {

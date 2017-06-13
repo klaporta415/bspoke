@@ -81,6 +81,11 @@ function generateRouteForGoogle(maneuverArray){
 
     routePath.setPath(pathArray)
 
+    routePath.addListener('click', function() {
+   //     infowindow.open(marker.get('map'), marker);
+   alert("Path Clicked")
+   });
+
   routePath.setMap(map);
   return pathArray;
 }

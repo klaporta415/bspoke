@@ -26,6 +26,11 @@ function addSavedMarker(location, category,  map) {
   icon: pinImages[category].icon,
   map: map
   });
+
+  marker.addListener('click', function() {
+    //     infowindow.open(marker.get('map'), marker);
+    alert(marker.category)
+  });
 }
 
 pinImages = {
@@ -65,6 +70,11 @@ function addMarker(location, map) {
       icon: pinImages[querySelection].icon,
       map: map
     });
+
+   marker.addListener('click', function() {
+   //     infowindow.open(marker.get('map'), marker);
+   alert(marker.category)
+   });
     // console.log(response);
   })
   .fail(function(failure){

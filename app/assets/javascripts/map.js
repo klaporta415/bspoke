@@ -22,7 +22,9 @@ function initMap() {
   // add pin to map by click and hold for 1sec
   pinClickEvent();
 
+
 } //end of map init
+
 
 /**
 * @constructor

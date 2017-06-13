@@ -30,6 +30,7 @@ var hereRoute = function(start,end){
           var pathArray = generateRouteForGoogle(maneuverArray);
           var gURL = generateURLForGoogleRoute(maneuverArray);
           var gURLString = '<a href=' + gURL + '>Take me there!</a>'
+          $('#google-link').empty();
           $('#map-page').append(gURLString);
 
 

@@ -92,6 +92,8 @@ AutocompleteDirectionsHandler.prototype.route = function() {
             var start = ([routePoints[0].lat(), routePoints[0].lng()])
             var end = ([routePoints[routePoints.length - 1].lat(), routePoints[routePoints.length - 1].lng()])
             var adjustedRoute = hereRoute(start , end);
+
+
       me.directionsDisplay.setDirections(response);
     } else {
       window.alert('Directions request failed due to ' + status);

@@ -48,13 +48,33 @@ function AutocompleteDirectionsHandler(map) {
   var destinationAutocomplete = new google.maps.places.Autocomplete(
       destinationInput, {placeIdOnly: true});
 
+  this.setupClickListener('avoid-nothing');
+  this.setupClickListener('avoid-everything');
+  this.setupClickListener('avoid-smell');
+  this.setupClickListener('avoid-goose');
+  this.setupClickListener('avoid-event');
+  this.setupClickListener('avoid-road-condition');
+  this.setupClickListener('avoid-general');
+
   this.setupPlaceChangedListener(originAutocomplete, 'ORIG');
   this.setupPlaceChangedListener(destinationAutocomplete, 'DEST');
 
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(originInput);
   this.map.controls[google.maps.ControlPosition.TOP_LEFT].push(destinationInput);
 
+
 }
+
+AutocompleteDirectionsHandler.prototype.setupClickListener = function(id) {
+  var radioButton = document.getElementById(id);
+  var me = this;
+  radioButton.addEventListener('click', function() {
+  var dropdown = $(this);
+     me.route();
+
+
+  });
+};
 
 AutocompleteDirectionsHandler.prototype.setupPlaceChangedListener = function(autocomplete, mode) {
   var me = this;

@@ -24,7 +24,13 @@ function addSavedMarker(location, category,  map) {
   var marker = new google.maps.Marker({
   position: location,
   icon: pinImages[category].icon,
-  map: map
+  map: map,
+  title: category
+  });
+
+  marker.addListener('click', function() {
+    //     infowindow.open(marker.get('map'), marker);
+    alert("marker was clicked")
   });
 }
 
@@ -51,8 +57,6 @@ function addMarker(location, map) {
   var querySelection = document.querySelector('input[name = "type"]:checked').value
  }
  else{var querySelection = "general"}
-  console.log("lat", location.lat());
-  console.log("long", location.lng());
   var pin = new Pin({latitude: location.lat(), longitude: location.lng(), category: querySelection});
   $.ajax({
     url: '/pins',
@@ -63,8 +67,14 @@ function addMarker(location, map) {
     var marker = new google.maps.Marker({
       position: location,
       icon: pinImages[querySelection].icon,
-      map: map
+      map: map,
+      title: pin.category
     });
+
+   marker.addListener('click', function() {
+   //     infowindow.open(marker.get('map'), marker);
+   alert("marker was clicked")
+   });
     // console.log(response);
   })
   .fail(function(failure){

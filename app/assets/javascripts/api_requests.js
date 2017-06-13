@@ -24,6 +24,18 @@ var hereRoute = function(start,end){
           var gURL = generateURLForGoogleRoute(maneuverArray);
           var gURLString = '<a href=' + gURL + '>Take me there!</a>'
           $('#map-page').append(gURLString);
+
+
+          // var legend = document.getElementById('legend');
+
+
+          // var div = document.createElement('div');
+          // div.innerHTML = '<a href=' + gURL + '>Take me there!</a>';
+          // legend.appendChild(div);
+
+          // map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
+
         })
       })
 }
@@ -68,6 +80,11 @@ function generateRouteForGoogle(maneuverArray){
     }
 
     routePath.setPath(pathArray)
+
+    routePath.addListener('click', function() {
+   //     infowindow.open(marker.get('map'), marker);
+   alert("Path Clicked")
+   });
 
   routePath.setMap(map);
   return pathArray;

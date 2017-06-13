@@ -4,6 +4,10 @@
 
     <input id="destination-input" class="controls" type="text"
         placeholder="Enter a destination location">
+
+
+
+
     <div class="pin-selectors">
       <div class="dropdown pins">
         <div id="marker-selector" class= "controls">
@@ -63,7 +67,8 @@
 
 
     <div id="map"></div>
-    <div id="map-page">
+<!--     <div id="legend"><h3></h3></div>
+ -->    <div id="map-page">
 
     </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['GOOGLE_API_KEY']%>&libraries=places,geometry&callback=initMap" async defer></script>

@@ -10,6 +10,8 @@ function initMap() {
   };
    map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+
+
    routePath = new google.maps.Polyline({
       path: []
     });
@@ -22,7 +24,9 @@ function initMap() {
   // add pin to map by click and hold for 1sec
   pinClickEvent();
 
+
 } //end of map init
+
 
 /**
 * @constructor
@@ -90,6 +94,8 @@ AutocompleteDirectionsHandler.prototype.route = function() {
             var start = ([routePoints[0].lat(), routePoints[0].lng()])
             var end = ([routePoints[routePoints.length - 1].lat(), routePoints[routePoints.length - 1].lng()])
             var adjustedRoute = hereRoute(start , end);
+
+
       me.directionsDisplay.setDirections(response);
     } else {
       window.alert('Directions request failed due to ' + status);

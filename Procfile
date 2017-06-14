@@ -1,1 +1,1 @@
-Pinsworker: be sidekic -c 1
+Pinsworker: be sidekiq -c 1

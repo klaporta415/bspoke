@@ -33,6 +33,7 @@ gem 'jquery-rails'
 gem 'sidekiq'
 gem 'devise-async'
 gem 'sinatra', github: 'sinatra/sinatra'
+gem 'whenever', :require => false
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

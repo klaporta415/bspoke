@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   resources :pins
   # get 'pins/pin_index'
   get 'home/map'
-  get 'reports/index'
+  get 'home/report'
   root "home#index"
 end

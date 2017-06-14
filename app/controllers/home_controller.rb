@@ -10,5 +10,6 @@ class HomeController < ApplicationController
     render plain: "Request to generate report"
 
   end
+  private
 
 end

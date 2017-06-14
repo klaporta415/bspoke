@@ -21,19 +21,20 @@ class PinsController < ApplicationController
 
 
   def create
-    @pin = Pin.create(pin_params)
-    # if pin.category = "event"
-    # pin.expiration_date = Time.now + 10
-    # elsif pin.category = "general"
-    # pin.expiration_date = Time.now + 20
-    # elsif pin.category = "smell"
-    #   pin.expiration_date = Time.now + 30
-    # elsif pin.category = "goose"
-    #   pin.expiration_date = Time.now + 40
-    # else
-    #   pin.expiration_date = Time.now + 50
-    # end
-    # pin.save
+    @pin = Pin.new(pin_params)
+    if @pin.category == "event"
+    @pin.expiration_date = Time.now + 10
+    elsif @pin.category == "general"
+    @pin.expiration_date = Time.now + 20
+    elsif @pin.category == "smell"
+      @pin.expiration_date = Time.now + 30
+    elsif @pin.category == "goose"
+      @pin.expiration_date = Time.now + 40
+    else
+      @pin.expiration_date = Time.now + 50
+    end
+    @pin.save
+    PinWorker.perform_async("2017-06-14 15:38:46");
 
   end
 

@@ -4,6 +4,7 @@ class CreatePins < ActiveRecord::Migration[5.1]
       t.string :latitude
       t.string :longitude
       t.string :category
+      t.string :experation_date
 
       t.timestamps
     end

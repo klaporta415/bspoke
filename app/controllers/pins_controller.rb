@@ -20,11 +20,24 @@ class PinsController < ApplicationController
   end
 
   def create
+    p params
     @pin = Pin.create(pin_params)
+    if @pin.category == "event"
+    @pin.experation_date = Time.now + 10
+    elsif @pin.category == "general"
+    @pin.experation_date = Time.now + 20
+    elsif @pin.category == "smell"
+      @pin.experation_date = Time.now + 30
+    elsif @pin.category == "goose"
+      @pin.experation_date = Time.now + 40
+    else
+      @pin.experation_date = Time.now + 50
+    end
+    @pin.save
   end
 
   private
     def pin_params
-      params.require(:pin).permit(:latitude, :longitude, :category)
+      params.require(:pin).permit(:latitude, :longitude, :category, :experation_date)
     end
 end

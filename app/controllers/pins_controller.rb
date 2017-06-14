@@ -1,5 +1,5 @@
 class PinsController < ApplicationController
-  # before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create]
 
   def index
     if params['avoid'] != nil

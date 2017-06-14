@@ -12,6 +12,7 @@ class PinsController < ApplicationController
     capturegroup = ["everything"]
    end
     pins = Pin.ordered_json(capturegroup)
+    p pins
     render json: pins
   end
 

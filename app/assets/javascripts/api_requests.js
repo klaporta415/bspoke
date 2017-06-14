@@ -1,12 +1,14 @@
 var hereRoute = function(start,end){
 
   if (document.querySelector('input[name = "avoid"]:checked') != null){
-  // var avoidSelection = document.querySelector('input[name = "avoid[]"]:checked').value
+  // var avoidSelection = document.querySelector('input[name = "avoid"]:checked').value
   // console.log(avoidSelection);
   var avoidSelection = $("#avoid-selector form").serialize();
     console.log(avoidSelection)
   }
   else{avoidSelection = "avoid=everything"}
+
+    console.log(avoidSelection)
 
 
   $.ajax({
@@ -54,6 +56,7 @@ function generateBuddyPins(response){
     avoidArray.push([(parseFloat(response[pin].latitude) + 0.001), (parseFloat(response[pin].longitude) + 0.001)]);
     avoidArray.push([response[pin].latitude, response[pin].longitude]);
   }
+  console.log(avoidArray)
   return avoidArray;
 }
 

@@ -1,5 +1,5 @@
 class PinsController < ApplicationController
-  # before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create]
 
   def index
     if params['avoid'] != nil
@@ -7,7 +7,7 @@ class PinsController < ApplicationController
      avoidance = params['avoid']
 
      capturegroup = avoidance.scan(/avoid=(\w+)/).flatten
-    # p capturegroup
+
    else
     capturegroup = ["everything"]
    end

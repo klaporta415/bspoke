@@ -52,50 +52,164 @@ pinImages = {
   }
 };
 
-function addMarker(location, map) {
+function addMarker(event, map) {
+  console.log("event was triggered and in addMarker")
+
+  var mainEvent = event
+
+  console.log(event.latLng.lat())
+  console.log(event.latLng.lng())
+
+    var eventLat = event.latLng.lat()
+    var eventLng = event.latLng.lng()
+
+    var pinInputDiv = document.getElementById('form-pin-div');
+
+    // '<select id="pin-select" name="type">' +
+    //         '<option selected disabled>Select Pin Type</option>' +
+    //         '<option id="changermarker-general" value="general">other</option>' +
+    //         '<option id="changermarker-smell" value="smell">smell</option>' +
+    //         '<option id="changermarker-goose" value="goose">goose</option>' +
+    //         '<option id="changermarker-event" value="event">event</option>' +
+    //         '<option id="changermarker-road-condition" value="roadCondition">road</option>' +
+    //       '</select>'
+
+     var contentString = '<form id="pin-info-form" class="controls">' +
+    '<input id="title-input" type="text" name="title" placeholder="Enter Pin Title">' +
+     '<input id="comment-input" type="text" name="comment" placeholder="Enter Pin Comment">' +
+      '<select id="pin-select" name="type">' +
+            '<option selected disabled>Select Pin Type</option>' +
+            '<option id="changermarker-general" value="general">other</option>' +
+            '<option id="changermarker-smell" value="smell">smell</option>' +
+            '<option id="changermarker-goose" value="goose">goose</option>' +
+            '<option id="changermarker-event" value="event">event</option>' +
+            '<option id="changermarker-road-condition" value="roadCondition">road</option>' +
+          '</select>' +
+     '<input id="pin-form-button" type="button", value="click">' +
+    '</form>';
+
+    var div = document.createElement('div');
+
+    div.innerHTML = contentString
+
+    pinInputDiv.appendChild(div);
+
+    console.log(pinInputDiv)
+
+    map.controls[google.maps.ControlPosition.CENTER].push(pinInputDiv);
 
 
- var querySelection = $('#pin-select').val()
+              $('#pin-info-form').on('click', '#pin-form-button', function(e) {
+            console.log("form was clicked")
+            // console.log(mainEvent)
+            var pinTitle = $('#title-input').val()
+            var pinComment = $('#comment-input').val()
+            console.log(eventLat)
+            console.log(eventLng)
 
- if (querySelection == null) {
-  querySelection = "general"
- }
+            var querySelection = $('#pin-select').val()
 
- // if (document.querySelector('input[name = "type"]:checked') != null){
- //  var querySelection = document.querySelector('input[name = "type"]:checked').value
+            if (querySelection == null) {
+              querySelection = "general"
+            }
 
+              console.log(querySelection)
+
+
+          var pin = new Pin({latitude: eventLat, longitude: eventLng, category: querySelection});
+
+
+
+            $.ajax({
+              url: '/pins',
+              method: 'post',
+              data: {pin: pin}
+              })
+             .done(function(response){
+               $('#form-pin-div').children().remove()
+
+               // var infowindow = new google.maps.InfoWindow();
+
+               var marker = new google.maps.Marker({
+               position: mainEvent.latLng,
+               icon: pinImages[querySelection].icon,
+               map: map,
+               title: pin.category
+               });
+
+                  var infowindow = new google.maps.InfoWindow({
+                   content: pinTitle
+                  });
+
+
+
+
+
+      marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+             // console.log(response);
+             })
+              .fail(function(failure){
+              console.log(failure);
+              window.confirm("Must login to add pins!");
+              window.location.href='/users/sign_in';
+              })
+
+
+
+
+
+
+          });
+
+
+
+
+
+
+
+ // var querySelection = $('#pin-select').val()
+
+ // if (querySelection == null) {
+ //  querySelection = "general"
  // }
- // else{var querySelection = "general"}
+
+ // // if (document.querySelector('input[name = "type"]:checked') != null){
+ // //  var querySelection = document.querySelector('input[name = "type"]:checked').value
+
+ // // }
+ // // else{var querySelection = "general"}
 
 
 
-  console.log(querySelection)
+ //  console.log(querySelection)
 
-  var pin = new Pin({latitude: location.lat(), longitude: location.lng(), category: querySelection});
-  $.ajax({
-    url: '/pins',
-    method: 'post',
-    data: {pin: pin}
-  })
-  .done(function(response){
-    var marker = new google.maps.Marker({
-      position: location,
-      icon: pinImages[querySelection].icon,
-      map: map,
-      title: pin.category
-    });
+  // var pin = new Pin({latitude: location.lat(), longitude: location.lng(), category: querySelection});
+  // $.ajax({
+  //   url: '/pins',
+  //   method: 'post',
+  //   data: {pin: pin}
+  // })
+  // .done(function(response){
+  //   var marker = new google.maps.Marker({
+  //     position: location,
+  //     icon: pinImages[querySelection].icon,
+  //     map: map,
+  //     title: pin.category
+  //   });
 
-   marker.addListener('click', function() {
-   //     infowindow.open(marker.get('map'), marker);
-   alert("marker was clicked")
-   });
-    // console.log(response);
-  })
-  .fail(function(failure){
-    console.log(failure);
-    window.confirm("Must login to add pins!");
-    window.location.href='/users/sign_in';
-  })
+  //  marker.addListener('click', function() {
+  //  //     infowindow.open(marker.get('map'), marker);
+  //  alert("marker was clicked")
+  //  });
+  //   // console.log(response);
+  // })
+  // .fail(function(failure){
+  //   console.log(failure);
+  //   window.confirm("Must login to add pins!");
+  //   window.location.href='/users/sign_in';
+  // })
   // markerArray.push([marker['position'].lat(),marker['position'].lng()])
 }
 
@@ -106,7 +220,7 @@ function pinClickEvent(){
 
     setTimeout(function(){
       if(mousedUp === false){
-        addMarker(event.latLng, map);
+        addMarker(event, map);
       }
     }, 1000);
   });

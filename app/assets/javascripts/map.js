@@ -12,17 +12,111 @@ function initMap() {
 
 
 
+
    routePath = new google.maps.Polyline({
       path: []
     });
 
    // ajax call loads pins saved in database
-   addPinsToMap();
+   // addPinsToMap();
     // autocomplete bars for start and end
   new AutocompleteDirectionsHandler(map);
 
   // add pin to map by click and hold for 1sec
   pinClickEvent();
+
+//   google.maps.event.addListener(map, 'dblclick', function(event){
+//     console.log("map was clicked")
+//     // console.log(event)
+//     var mainEvent = event
+
+
+//     console.log(event.latLng.lat())
+//     console.log(event.latLng.lng())
+
+//     var eventLat = event.latLng.lat()
+//     var eventLng = event.latLng.lng()
+//     // console.log(mainEvent)
+//     console.log("------")
+
+
+// //       <form id="pin-info-form" class="controls hidden">
+// //   <input id="title-input" type="text" name="title" placeholder="Enter Pin Title">
+// //   <input id="comment-input" type="text" name="comment" placeholder="Enter Pin Comment">
+// //   <input type="submit" value="Submit">
+// // </form>
+
+
+
+
+//     var pinInputDiv = document.getElementById('form-pin-div');
+
+//     var contentString = '<form id="pin-info-form" class="controls">' +
+//     '<input id="title-input" type="text" name="title" placeholder="Enter Pin Title">' +
+//      '<input id="comment-input" type="text" name="comment" placeholder="Enter Pin Comment">' +
+//      '<input id="pin-form-button" type="button", value="click">' +
+//     '</form>';
+
+//     var div = document.createElement('div');
+
+//     div.innerHTML = contentString
+
+//     pinInputDiv.appendChild(div);
+
+
+
+//           map.controls[google.maps.ControlPosition.CENTER].push(pinInputDiv);
+
+
+
+//           $('#pin-info-form').on('click', '#pin-form-button', function(e) {
+//             console.log("form was clicked")
+//             // console.log(mainEvent)
+//             var pinTitle = $('#title-input').val()
+//             var pinComment = $('#comment-input').val()
+//             console.log(eventLat)
+//             console.log(eventLng)
+
+
+
+
+
+//             var pin = new Pin({latitude: eventLat, longitude: eventLng, category: "querySelection"});
+
+
+//               $.ajax({
+//                url: '/pins',
+//                method: 'post',
+//               data: {pin: pin}
+//               })
+//             .done(function(response){
+//              var marker = new google.maps.Marker({
+//              position: mainEvent.latLng,
+//              map: map,
+//             title: pin.category
+//             });
+//             });
+
+//             $('#form-pin-div').children().remove()
+
+
+//           });
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   });
+
+
 
 
 } //end of map init

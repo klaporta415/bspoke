@@ -2,6 +2,8 @@ var Pin = function(locationDetails) {
   this.latitude = locationDetails.latitude,
   this.longitude = locationDetails.longitude
   this.category = locationDetails.category
+  this.title = locationDetails.title
+  this.comment = locationDetails.comment
 }
 
 function addPinsToMap() {
@@ -112,8 +114,8 @@ function addMarker(event, map) {
             // console.log(mainEvent)
             var pinTitle = $('#title-input').val()
             var pinComment = $('#comment-input').val()
-            console.log(eventLat)
-            console.log(eventLng)
+            console.log(pinTitle)
+            console.log(pinComment)
 
             var querySelection = $('#pin-select').val()
 
@@ -124,7 +126,7 @@ function addMarker(event, map) {
               console.log(querySelection)
 
 
-          var pin = new Pin({latitude: eventLat, longitude: eventLng, category: querySelection, title: "PINTITLE", comment: "PINCOMMENT"});
+          var pin = new Pin({latitude: eventLat, longitude: eventLng, category: querySelection, title: pinTitle, comment: pinComment});
 
 
 

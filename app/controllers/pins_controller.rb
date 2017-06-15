@@ -30,8 +30,8 @@ class PinsController < ApplicationController
     else
       @pin.expiration_date = Time.now + 2.days
     end
-    @pin.title = "Pin Title2"
-    @pin.comment = "Pin Comment2"
+    # @pin.title = "Pin Title2"
+    # @pin.comment = "Pin Comment2"
     @pin.save
   end
 

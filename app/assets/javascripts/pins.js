@@ -85,8 +85,8 @@ function addMarker(event, map) {
     //       '</select>'
 
      var contentString = '<form id="pin-info-form" class="controls">' +
-    '<input id="title-input" type="text" name="title" placeholder="Enter Pin Title">' +
-     '<input id="comment-input" type="text" name="comment" placeholder="Enter Pin Comment">' +
+    '<input id="title-input" type="text" name="title" placeholder="Enter Pin Title"> <br>' +
+     '<input id="comment-input" type="text" name="comment" placeholder="Enter Pin Comment"> <br>' +
       '<select id="pin-select" name="type">' +
             '<option selected disabled>Select Pin Type</option>' +
             '<option id="changermarker-general" value="general">other</option>' +
@@ -94,9 +94,10 @@ function addMarker(event, map) {
             '<option id="changermarker-goose" value="goose">goose</option>' +
             '<option id="changermarker-event" value="event">event</option>' +
             '<option id="changermarker-road-condition" value="roadCondition">road</option>' +
-          '</select>' +
-     '<input id="pin-form-button" type="button", value="click">' +
+          '</select> <br>' +
+     '<input id="pin-form-button" type="button", value="Add Pin">' +
     '</form>';
+
 
     var div = document.createElement('div');
 

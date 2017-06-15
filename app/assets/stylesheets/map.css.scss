@@ -59,4 +59,43 @@
       }
 
 
+    #reroute_button{
+    display: inline-block;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: 1px solid #018dc4;
+    -webkit-border-radius: 55px;
+    border-radius: 55px;
+    font: normal 8.3px/normal Montserrat, sans-serif;
+    color: rgba(255,255,255,1);
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: -webkit-linear-gradient(-104.03624346792648deg, #29dba3 0, #29dba3 22%, #0bc0dc 46%, #668586 76%, #29dba3 94%, #29dba3 100%);
+    background: -moz-linear-gradient(194.03624346792648deg, #29dba3 0, #29dba3 22%, #0bc0dc 46%, #668586 76%, #29dba3 94%, #29dba3 100%);
+    background: linear-gradient(194.03624346792648deg, #29dba3 0, #29dba3 22%, #0bc0dc 46%, #668586 76%, #29dba3 94%, #29dba3 100%);
+    background-position: 50% 50%;
+    -webkit-background-origin: padding-box;
+    background-origin: padding-box;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-background-size: auto auto;
+    background-size: auto auto;
+    -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) ;
+    -webkit-transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -moz-transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transform: rotateX(-3.4377467707849396deg) rotateY(-1.7188733853924696deg)   ;
+    transform: rotateX(-3.4377467707849396deg) rotateY(-1.7188733853924696deg) ;
+    width: 35%;
+    margin: 3%;
+    height:3%;
+
+  }
+
+
 

@@ -29,7 +29,7 @@ var hereRoute = function(start,end){
           var maneuverArray = generateManeuverArray(response);
           var pathArray = generateRouteForGoogle(maneuverArray);
           var gURL = generateURLForGoogleRoute(maneuverArray);
-          var gURLString = '<a href=' + gURL + '>Take me there!</a>'
+          var gURLString = '<a  href=' + gURL + '>Take me there!</a>'
           $('#google-link').empty();
           $('#map-page').append(gURLString);
 
@@ -38,7 +38,7 @@ var hereRoute = function(start,end){
 
 
           var div = document.createElement('div');
-          div.innerHTML = '<a href=' + gURL + '>Take me there!</a>';
+          div.innerHTML = '<a id="reroute_button" href=' + gURL + '>Take me there!</a>';
           googleLink.appendChild(div);
 
           map.controls[google.maps.ControlPosition.CENTER].push(googleLink);

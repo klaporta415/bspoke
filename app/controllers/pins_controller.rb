@@ -22,16 +22,12 @@ class PinsController < ApplicationController
 
   def create
     @pin = Pin.create(pin_params)
-    if @pin.category == "event"
-    @pin.expiration_date = Time.now + 10
-    elsif @pin.category == "general"
-    @pin.expiration_date = Time.now + 20
-    elsif @pin.category == "smell"
-      @pin.expiration_date = Time.now + 30
+    if @pin.category == "roadCondition"
+    @pin.expiration_date = Time.now + 2.weeks
     elsif @pin.category == "goose"
-      @pin.expiration_date = Time.now + 40
+    @pin.expiration_date = Time.now + 1.day
     else
-      @pin.expiration_date = Time.now + 50
+      @pin.expiration_date = Time.now + 2.days
     end
     @pin.save
   end

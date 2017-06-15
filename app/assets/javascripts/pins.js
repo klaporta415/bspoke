@@ -57,6 +57,10 @@ function addMarker(location, map) {
 
  var querySelection = $('#pin-select').val()
 
+ if (querySelection == null) {
+  querySelection = "general"
+ }
+
  // if (document.querySelector('input[name = "type"]:checked') != null){
  //  var querySelection = document.querySelector('input[name = "type"]:checked').value
 

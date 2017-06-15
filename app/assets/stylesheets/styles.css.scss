@@ -137,18 +137,20 @@
   margin-bottom: 10px;
 }
 body{
-  background: url("http://res.cloudinary.com/lx9gdutds/image/upload/v1497488735/form_background_bspoke_vdiife.png");
+  background: url("http://res.cloudinary.com/lx9gdutds/image/upload/v1497533872/Bspoke-general_tf5zcg.png");
   background-repeat: no-repeat;
   background-size:100% auto;
 
+
 }
-#new_user{
+.new_user{
 margin: 0 auto;
-width:50%;
+width:80%;
 
 }
 /*-webkit-box-shadow: 0 0 0 1000px white inset !important;*/
-#new_user input{
+.new_user input{
+
   display: inline-block;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
@@ -182,14 +184,14 @@ width:50%;
   transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
   -webkit-transform: rotateX(-3.4377467707849396deg) rotateY(-1.7188733853924696deg)   ;
   transform: rotateX(-3.4377467707849396deg) rotateY(-1.7188733853924696deg) ;
-  width: 55%;
+  width: 60%;
   margin-bottom: 10px;
 }
 #user_password{
   background-color:white;
 }
 #h2-login{
-padding-top: 9px;
+padding-top: 50px;
 padding-left: 25px;
 margin: 0 auto;
 width:50%;
@@ -211,11 +213,13 @@ input:-webkit-autofill:active {
 
 }
 .field{
-color:#ADE8E6;
-text-shadow: 2px 2px #668586;
+color:white;
+text-shadow: 2px 2px black;
+
+
 }
 #h2-sign-up{
-padding-top: 9px;
+padding-top: 50px;
 padding-left: 25px;
 margin: 0 auto;
 width:50%;
@@ -224,6 +228,17 @@ text-shadow: 2px 2px white;
 }
 #user_password_confirmation{
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
+
+}
+#button-submit{
+  color:white;
+}
+#button-submit2{
+  color:white;
+}
+.sign-up-forms{
+  padding-top: 30px;
+  padding-left: 36px;
 
 }
 

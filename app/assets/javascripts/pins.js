@@ -53,10 +53,20 @@ pinImages = {
 };
 
 function addMarker(location, map) {
- if (document.querySelector('input[name = "type"]:checked') != null){
-  var querySelection = document.querySelector('input[name = "type"]:checked').value
- }
- else{var querySelection = "general"}
+
+
+ var querySelection = $('#pin-select').val()
+
+ // if (document.querySelector('input[name = "type"]:checked') != null){
+ //  var querySelection = document.querySelector('input[name = "type"]:checked').value
+
+ // }
+ // else{var querySelection = "general"}
+
+
+
+  console.log(querySelection)
+
   var pin = new Pin({latitude: location.lat(), longitude: location.lng(), category: querySelection});
   $.ajax({
     url: '/pins',

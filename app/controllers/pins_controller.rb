@@ -21,6 +21,7 @@ class PinsController < ApplicationController
   end
 
   def create
+    p params
     @pin = Pin.create(pin_params)
     if @pin.category == "roadCondition"
     @pin.expiration_date = Time.now + 2.weeks
@@ -29,11 +30,13 @@ class PinsController < ApplicationController
     else
       @pin.expiration_date = Time.now + 2.days
     end
+    @pin.title = "Pin Title2"
+    @pin.comment = "Pin Comment2"
     @pin.save
   end
 
   private
     def pin_params
-      params.require(:pin).permit(:latitude, :longitude, :category, :expiration_date)
+      params.require(:pin).permit(:latitude, :longitude, :category, :expiration_date, :title, :comment)
     end
 end

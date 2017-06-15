@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20170609200445) do
     t.string "longitude"
     t.string "category"
     t.datetime "expiration_date"
+    t.string "title"
+    t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

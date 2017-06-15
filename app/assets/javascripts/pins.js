@@ -12,15 +12,18 @@ function addPinsToMap() {
     })
     .done(function(response){
       for(var i = 0; i < response.length; i ++) {
+        var markerObject = response[i]
         var marker = {lat: parseFloat(response[i]['latitude']), lng: parseFloat(response[i]['longitude'])}
         var category = response[i].category
-        addSavedMarker(marker, category, map);
+        addSavedMarker(markerObject, marker, category, map);
       }
+
   })
 }
 
+
 // contains marker images, saves marker
-function addSavedMarker(location, category,  map) {
+function addSavedMarker(markerObject, location, category,  map) {
   var marker = new google.maps.Marker({
   position: location,
   icon: pinImages[category].icon,
@@ -28,10 +31,15 @@ function addSavedMarker(location, category,  map) {
   title: category
   });
 
-  marker.addListener('click', function() {
-    //     infowindow.open(marker.get('map'), marker);
-    alert("marker was clicked")
-  });
+ var infowindow = new google.maps.InfoWindow({
+    content: '<h2>' + markerObject.title + '</h2>' +
+      '<p>' + markerObject.comment + '</p>'
+    });
+
+
+      marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
 }
 
 pinImages = {
@@ -116,7 +124,7 @@ function addMarker(event, map) {
               console.log(querySelection)
 
 
-          var pin = new Pin({latitude: eventLat, longitude: eventLng, category: querySelection});
+          var pin = new Pin({latitude: eventLat, longitude: eventLng, category: querySelection, title: "PINTITLE", comment: "PINCOMMENT"});
 
 
 
@@ -138,7 +146,8 @@ function addMarker(event, map) {
                });
 
                   var infowindow = new google.maps.InfoWindow({
-                   content: pinTitle
+                   content: '<h2>' + pinTitle + '</h2>' +
+                            '<p>' + pinComment + '</p>'
                   });
 
 

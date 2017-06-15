@@ -5,6 +5,8 @@ class CreatePins < ActiveRecord::Migration[5.1]
       t.string :longitude
       t.string :category
       t.datetime :expiration_date
+      t.string :title
+      t.string :comment
 
       t.timestamps
     end

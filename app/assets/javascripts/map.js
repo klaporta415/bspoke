@@ -18,7 +18,7 @@ function initMap() {
     });
 
    // ajax call loads pins saved in database
-   // addPinsToMap();
+   addPinsToMap();
     // autocomplete bars for start and end
   new AutocompleteDirectionsHandler(map);
 

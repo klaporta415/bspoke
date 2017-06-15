@@ -1,4 +1,5 @@
 $(document).ready(function(){
+      $('#about-page').closest('div').addClass('hidden');
 
   $("#about").on("click", function(event){
     event.preventDefault();
@@ -9,7 +10,11 @@ $(document).ready(function(){
     })
     .done(function(response){
       console.log(response);
-      $('#about-page').closest('div').toggle();
+      if($("#about-page").hasClass('hidden')){
+        $('#about-page').closest('div').removeClass('hidden');
+      } else {
+        $('#about-page').closest('div').addClass('hidden');
+      }
     })
     // if ($(".about-page").is("hidden")){
     //   $(".about-page").slideDown("slow");

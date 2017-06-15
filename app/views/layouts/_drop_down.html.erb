@@ -2,9 +2,9 @@
   <a class="btn btn-default" role="button" data-toggle="dropdown" href="#"><%= image_tag "nav-icon.png" %><span class="caret"></span></a>
   <ul class="dropdown-menu">
     <% if current_user %>
-      <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+      <li><%= link_to "Sign-out", destroy_user_session_path, method: :delete %></li>
     <% else %>
-      <li><%= link_to "Log in", new_session_path(resource_name) %></li>
+      <li><%= link_to "Sign-in", new_session_path(resource_name) %></li>
       <li><%= link_to "Sign up", new_registration_path(resource_name) %></li>
     <% end %>
 

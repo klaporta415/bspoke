@@ -1,7 +1,7 @@
 $(document).ready(function(){
       $('#about-page').closest('div').addClass('hidden');
 
-  $("#about").on("click", function(event){
+  $("body").on("click", ".about-header", function(event){
     event.preventDefault();
     console.log("hiiii");
     $.ajax({

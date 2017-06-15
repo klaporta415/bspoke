@@ -28,10 +28,10 @@ function addSavedMarker(location, category,  map) {
   title: category
   });
 
-  marker.addListener('click', function() {
-    //     infowindow.open(marker.get('map'), marker);
-    alert("marker was clicked")
-  });
+  // marker.addListener('click', function() {
+  //   //     infowindow.open(marker.get('map'), marker);
+  //   alert("marker was clicked")
+  // });
 }
 
 pinImages = {
@@ -71,10 +71,10 @@ function addMarker(location, map) {
       title: pin.category
     });
 
-   marker.addListener('click', function() {
-   //     infowindow.open(marker.get('map'), marker);
-   alert("marker was clicked")
-   });
+   // marker.addListener('click', function() {
+   // //     infowindow.open(marker.get('map'), marker);
+   // alert("marker was clicked")
+   // });
     // console.log(response);
   })
   .fail(function(failure){

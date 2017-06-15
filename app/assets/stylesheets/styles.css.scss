@@ -149,7 +149,7 @@ width:50%;
 }
 /*-webkit-box-shadow: 0 0 0 1000px white inset !important;*/
 #new_user input{
-    display: inline-block;
+  display: inline-block;
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
@@ -160,6 +160,8 @@ width:50%;
   border-radius: 55px;
   font: normal 14px/normal Montserrat, sans-serif;
   color:black;
+
+
   -o-text-overflow: clip;
   text-overflow: clip;
   background: -webkit-linear-gradient(-104.03624346792648deg, #29dba3 0, #29dba3 22%, #0bc0dc 46%, #668586 76%, #29dba3 94%, #29dba3 100%);
@@ -224,4 +226,5 @@ text-shadow: 2px 2px white;
   -webkit-box-shadow: 0 0 0 1000px white inset !important;
 
 }
+
 
